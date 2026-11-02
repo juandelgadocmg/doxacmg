@@ -11,8 +11,8 @@ RUN apk add --no-cache libc6-compat
 # Copiar manifiestos de paquetes
 COPY package.json package-lock.json ./
 
-# Instalar dependencias del proyecto
-RUN npm install
+# Instalar dependencias del proyecto ignorando conflictos de peer dependencies
+RUN npm install --legacy-peer-deps
 
 # Copiar todo el código fuente
 COPY . .
@@ -45,3 +45,4 @@ EXPOSE 80
 
 # Iniciar servidor Nginx
 CMD ["nginx", "-g", "daemon off;"]
+
