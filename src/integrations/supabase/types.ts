@@ -1,0 +1,7194 @@
+export type Json =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: Json | undefined }
+  | Json[]
+
+export type Database = {
+  // Allows to automatically instantiate createClient with right options
+  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
+  __InternalSupabase: {
+    PostgrestVersion: "14.1"
+  }
+  public: {
+    Tables: {
+      alertas_importantes: {
+        Row: {
+          categoria: string | null
+          created_at: string
+          created_by: string | null
+          created_by_email: string | null
+          descripcion: string | null
+          estado: string
+          grupo_id: string | null
+          id: string
+          metadata: Json | null
+          persona_id: string | null
+          read_at: string | null
+          resolved_at: string | null
+          severidad: string
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          categoria?: string | null
+          created_at?: string
+          created_by?: string | null
+          created_by_email?: string | null
+          descripcion?: string | null
+          estado?: string
+          grupo_id?: string | null
+          id?: string
+          metadata?: Json | null
+          persona_id?: string | null
+          read_at?: string | null
+          resolved_at?: string | null
+          severidad?: string
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          categoria?: string | null
+          created_at?: string
+          created_by?: string | null
+          created_by_email?: string | null
+          descripcion?: string | null
+          estado?: string
+          grupo_id?: string | null
+          id?: string
+          metadata?: Json | null
+          persona_id?: string | null
+          read_at?: string | null
+          resolved_at?: string | null
+          severidad?: string
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "alertas_importantes_grupo_id_fkey"
+            columns: ["grupo_id"]
+            isOneToOne: false
+            referencedRelation: "grupos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "alertas_importantes_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      asistencia: {
+        Row: {
+          checkin_time: string | null
+          clasificacion: string | null
+          created_at: string
+          es_nuevo: boolean | null
+          firma_at: string | null
+          firma_capturada_por: string | null
+          firma_data_url: string | null
+          id: string
+          metodo_registro: string
+          observaciones: string | null
+          persona_id: string
+          presente: boolean
+          puntualidad: string | null
+          servicio_id: string
+        }
+        Insert: {
+          checkin_time?: string | null
+          clasificacion?: string | null
+          created_at?: string
+          es_nuevo?: boolean | null
+          firma_at?: string | null
+          firma_capturada_por?: string | null
+          firma_data_url?: string | null
+          id?: string
+          metodo_registro?: string
+          observaciones?: string | null
+          persona_id: string
+          presente?: boolean
+          puntualidad?: string | null
+          servicio_id: string
+        }
+        Update: {
+          checkin_time?: string | null
+          clasificacion?: string | null
+          created_at?: string
+          es_nuevo?: boolean | null
+          firma_at?: string | null
+          firma_capturada_por?: string | null
+          firma_data_url?: string | null
+          id?: string
+          metodo_registro?: string
+          observaciones?: string | null
+          persona_id?: string
+          presente?: boolean
+          puntualidad?: string | null
+          servicio_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "asistencia_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "asistencia_servicio_id_fkey"
+            columns: ["servicio_id"]
+            isOneToOne: false
+            referencedRelation: "servicios"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      asistencia_materias: {
+        Row: {
+          created_at: string
+          fecha: string
+          id: string
+          materia_id: string
+          matricula_id: string
+          presente: boolean
+        }
+        Insert: {
+          created_at?: string
+          fecha?: string
+          id?: string
+          materia_id: string
+          matricula_id: string
+          presente?: boolean
+        }
+        Update: {
+          created_at?: string
+          fecha?: string
+          id?: string
+          materia_id?: string
+          matricula_id?: string
+          presente?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "asistencia_materias_materia_id_fkey"
+            columns: ["materia_id"]
+            isOneToOne: false
+            referencedRelation: "materias"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "asistencia_materias_matricula_id_fkey"
+            columns: ["matricula_id"]
+            isOneToOne: false
+            referencedRelation: "matriculas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      aulas: {
+        Row: {
+          activo: boolean
+          created_at: string
+          direccion: string | null
+          id: string
+          nombre: string
+          sede: string | null
+        }
+        Insert: {
+          activo?: boolean
+          created_at?: string
+          direccion?: string | null
+          id?: string
+          nombre: string
+          sede?: string | null
+        }
+        Update: {
+          activo?: boolean
+          created_at?: string
+          direccion?: string | null
+          id?: string
+          nombre?: string
+          sede?: string | null
+        }
+        Relationships: []
+      }
+      banners: {
+        Row: {
+          created_at: string
+          estado: string
+          id: string
+          imagen_url: string
+          orden: number
+          titulo: string
+        }
+        Insert: {
+          created_at?: string
+          estado?: string
+          id?: string
+          imagen_url: string
+          orden?: number
+          titulo: string
+        }
+        Update: {
+          created_at?: string
+          estado?: string
+          id?: string
+          imagen_url?: string
+          orden?: number
+          titulo?: string
+        }
+        Relationships: []
+      }
+      bug_reports: {
+        Row: {
+          created_at: string
+          descripcion: string
+          estado: string
+          extra: Json | null
+          id: string
+          platform: string | null
+          ruta: string | null
+          screen: string | null
+          updated_at: string
+          user_agent: string | null
+          user_id: string | null
+          viewport: string | null
+        }
+        Insert: {
+          created_at?: string
+          descripcion: string
+          estado?: string
+          extra?: Json | null
+          id?: string
+          platform?: string | null
+          ruta?: string | null
+          screen?: string | null
+          updated_at?: string
+          user_agent?: string | null
+          user_id?: string | null
+          viewport?: string | null
+        }
+        Update: {
+          created_at?: string
+          descripcion?: string
+          estado?: string
+          extra?: Json | null
+          id?: string
+          platform?: string | null
+          ruta?: string | null
+          screen?: string | null
+          updated_at?: string
+          user_agent?: string | null
+          user_id?: string | null
+          viewport?: string | null
+        }
+        Relationships: []
+      }
+      calificaciones: {
+        Row: {
+          created_at: string
+          id: string
+          item_id: string
+          matricula_id: string
+          nota: number | null
+          observacion: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          item_id: string
+          matricula_id: string
+          nota?: number | null
+          observacion?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          item_id?: string
+          matricula_id?: string
+          nota?: number | null
+          observacion?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "calificaciones_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "items_calificables"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "calificaciones_matricula_id_fkey"
+            columns: ["matricula_id"]
+            isOneToOne: false
+            referencedRelation: "matriculas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      categorias_financieras: {
+        Row: {
+          created_at: string
+          id: string
+          nombre: string
+          parent_id: string | null
+          tipo: Database["public"]["Enums"]["tipo_finanza"]
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          nombre: string
+          parent_id?: string | null
+          tipo: Database["public"]["Enums"]["tipo_finanza"]
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          nombre?: string
+          parent_id?: string | null
+          tipo?: Database["public"]["Enums"]["tipo_finanza"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "categorias_financieras_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "categorias_financieras"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      cert_export_log: {
+        Row: {
+          actor_email: string | null
+          actor_user_id: string | null
+          browser_cache_hit: boolean
+          contexto: Json
+          created_at: string
+          id: string
+          persona_id: string | null
+          template_asset_id: string | null
+          template_asset_url: string | null
+          template_id: string | null
+          template_version: number | null
+          tipo: Database["public"]["Enums"]["cert_template_tipo"]
+          user_agent: string | null
+        }
+        Insert: {
+          actor_email?: string | null
+          actor_user_id?: string | null
+          browser_cache_hit?: boolean
+          contexto?: Json
+          created_at?: string
+          id?: string
+          persona_id?: string | null
+          template_asset_id?: string | null
+          template_asset_url?: string | null
+          template_id?: string | null
+          template_version?: number | null
+          tipo: Database["public"]["Enums"]["cert_template_tipo"]
+          user_agent?: string | null
+        }
+        Update: {
+          actor_email?: string | null
+          actor_user_id?: string | null
+          browser_cache_hit?: boolean
+          contexto?: Json
+          created_at?: string
+          id?: string
+          persona_id?: string | null
+          template_asset_id?: string | null
+          template_asset_url?: string | null
+          template_id?: string | null
+          template_version?: number | null
+          tipo?: Database["public"]["Enums"]["cert_template_tipo"]
+          user_agent?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cert_export_log_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "cert_export_log_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "cert_templates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      cert_templates: {
+        Row: {
+          activo: boolean
+          asset_filename: string | null
+          asset_id: string | null
+          asset_size: number | null
+          asset_url: string
+          created_at: string
+          created_by: string | null
+          created_by_email: string | null
+          descripcion: string | null
+          es_default: boolean
+          id: string
+          nombre: string
+          preview_url: string | null
+          storage_bucket: string | null
+          storage_path: string | null
+          tipo: Database["public"]["Enums"]["cert_template_tipo"]
+          updated_at: string
+          version: number
+        }
+        Insert: {
+          activo?: boolean
+          asset_filename?: string | null
+          asset_id?: string | null
+          asset_size?: number | null
+          asset_url: string
+          created_at?: string
+          created_by?: string | null
+          created_by_email?: string | null
+          descripcion?: string | null
+          es_default?: boolean
+          id?: string
+          nombre: string
+          preview_url?: string | null
+          storage_bucket?: string | null
+          storage_path?: string | null
+          tipo: Database["public"]["Enums"]["cert_template_tipo"]
+          updated_at?: string
+          version?: number
+        }
+        Update: {
+          activo?: boolean
+          asset_filename?: string | null
+          asset_id?: string | null
+          asset_size?: number | null
+          asset_url?: string
+          created_at?: string
+          created_by?: string | null
+          created_by_email?: string | null
+          descripcion?: string | null
+          es_default?: boolean
+          id?: string
+          nombre?: string
+          preview_url?: string | null
+          storage_bucket?: string | null
+          storage_path?: string | null
+          tipo?: Database["public"]["Enums"]["cert_template_tipo"]
+          updated_at?: string
+          version?: number
+        }
+        Relationships: []
+      }
+      certificados: {
+        Row: {
+          codigo: string
+          created_at: string
+          curso_id: string | null
+          fecha_emision: string
+          id: string
+          matricula_id: string | null
+          persona_id: string
+          tipo_certificado: string | null
+        }
+        Insert: {
+          codigo?: string
+          created_at?: string
+          curso_id?: string | null
+          fecha_emision?: string
+          id?: string
+          matricula_id?: string | null
+          persona_id: string
+          tipo_certificado?: string | null
+        }
+        Update: {
+          codigo?: string
+          created_at?: string
+          curso_id?: string | null
+          fecha_emision?: string
+          id?: string
+          matricula_id?: string | null
+          persona_id?: string
+          tipo_certificado?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "certificados_curso_id_fkey"
+            columns: ["curso_id"]
+            isOneToOne: false
+            referencedRelation: "cursos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "certificados_matricula_id_fkey"
+            columns: ["matricula_id"]
+            isOneToOne: true
+            referencedRelation: "matriculas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "certificados_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      citas_consejeria: {
+        Row: {
+          consejero_email: string | null
+          consejero_nombre: string | null
+          consejero_persona_id: string
+          created_at: string
+          created_by: string | null
+          enlace_virtual: string | null
+          estado: string
+          fecha: string
+          hora_fin: string
+          hora_inicio: string
+          id: string
+          lugar: string | null
+          modalidad: string
+          motivo_cancelacion: string | null
+          motivo_categoria: string
+          motivo_descripcion: string | null
+          notas_admin: string | null
+          requiere_consolidacion: boolean
+          requiere_intercesion: boolean
+          solicitante_email: string | null
+          solicitante_nombre: string
+          solicitante_persona_id: string | null
+          solicitante_telefono: string | null
+          solicitante_user_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          consejero_email?: string | null
+          consejero_nombre?: string | null
+          consejero_persona_id: string
+          created_at?: string
+          created_by?: string | null
+          enlace_virtual?: string | null
+          estado?: string
+          fecha: string
+          hora_fin: string
+          hora_inicio: string
+          id?: string
+          lugar?: string | null
+          modalidad: string
+          motivo_cancelacion?: string | null
+          motivo_categoria?: string
+          motivo_descripcion?: string | null
+          notas_admin?: string | null
+          requiere_consolidacion?: boolean
+          requiere_intercesion?: boolean
+          solicitante_email?: string | null
+          solicitante_nombre: string
+          solicitante_persona_id?: string | null
+          solicitante_telefono?: string | null
+          solicitante_user_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          consejero_email?: string | null
+          consejero_nombre?: string | null
+          consejero_persona_id?: string
+          created_at?: string
+          created_by?: string | null
+          enlace_virtual?: string | null
+          estado?: string
+          fecha?: string
+          hora_fin?: string
+          hora_inicio?: string
+          id?: string
+          lugar?: string | null
+          modalidad?: string
+          motivo_cancelacion?: string | null
+          motivo_categoria?: string
+          motivo_descripcion?: string | null
+          notas_admin?: string | null
+          requiere_consolidacion?: boolean
+          requiere_intercesion?: boolean
+          solicitante_email?: string | null
+          solicitante_nombre?: string
+          solicitante_persona_id?: string | null
+          solicitante_telefono?: string | null
+          solicitante_user_id?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      conceptos_pago: {
+        Row: {
+          created_at: string
+          curso_id: string
+          id: string
+          monto: number
+          nombre: string
+        }
+        Insert: {
+          created_at?: string
+          curso_id: string
+          id?: string
+          monto?: number
+          nombre: string
+        }
+        Update: {
+          created_at?: string
+          curso_id?: string
+          id?: string
+          monto?: number
+          nombre?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "conceptos_pago_curso_id_fkey"
+            columns: ["curso_id"]
+            isOneToOne: false
+            referencedRelation: "cursos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      configuracion_iglesia: {
+        Row: {
+          ciudad: string | null
+          color_primario: string | null
+          created_at: string
+          descripcion: string | null
+          direccion: string | null
+          discipulando_logo_url: string | null
+          discipulando_url: string | null
+          email: string | null
+          horario_servicios: string | null
+          id: string
+          logo_url: string | null
+          moneda: string | null
+          nombre_iglesia: string
+          pais: string | null
+          pastor_principal: string | null
+          planilla_color_encabezado: string | null
+          planilla_columnas: Json
+          planilla_mostrar_logo: boolean
+          planilla_pie: string | null
+          planilla_subtitulo: string | null
+          planilla_titulo: string | null
+          senal_en_vivo_activa: boolean | null
+          senal_en_vivo_url: string | null
+          sitio_web: string | null
+          telefono: string | null
+          tema_semana_descripcion: string | null
+          tema_semana_pdf_url: string | null
+          tema_semana_titulo: string | null
+          tema_semana_url: string | null
+          tesoreria_cdp_dias_mora: number
+          tesoreria_cdp_tolerancia_abs: number
+          tesoreria_cdp_tolerancia_pct: number
+          updated_at: string
+          zona_horaria: string | null
+        }
+        Insert: {
+          ciudad?: string | null
+          color_primario?: string | null
+          created_at?: string
+          descripcion?: string | null
+          direccion?: string | null
+          discipulando_logo_url?: string | null
+          discipulando_url?: string | null
+          email?: string | null
+          horario_servicios?: string | null
+          id?: string
+          logo_url?: string | null
+          moneda?: string | null
+          nombre_iglesia?: string
+          pais?: string | null
+          pastor_principal?: string | null
+          planilla_color_encabezado?: string | null
+          planilla_columnas?: Json
+          planilla_mostrar_logo?: boolean
+          planilla_pie?: string | null
+          planilla_subtitulo?: string | null
+          planilla_titulo?: string | null
+          senal_en_vivo_activa?: boolean | null
+          senal_en_vivo_url?: string | null
+          sitio_web?: string | null
+          telefono?: string | null
+          tema_semana_descripcion?: string | null
+          tema_semana_pdf_url?: string | null
+          tema_semana_titulo?: string | null
+          tema_semana_url?: string | null
+          tesoreria_cdp_dias_mora?: number
+          tesoreria_cdp_tolerancia_abs?: number
+          tesoreria_cdp_tolerancia_pct?: number
+          updated_at?: string
+          zona_horaria?: string | null
+        }
+        Update: {
+          ciudad?: string | null
+          color_primario?: string | null
+          created_at?: string
+          descripcion?: string | null
+          direccion?: string | null
+          discipulando_logo_url?: string | null
+          discipulando_url?: string | null
+          email?: string | null
+          horario_servicios?: string | null
+          id?: string
+          logo_url?: string | null
+          moneda?: string | null
+          nombre_iglesia?: string
+          pais?: string | null
+          pastor_principal?: string | null
+          planilla_color_encabezado?: string | null
+          planilla_columnas?: Json
+          planilla_mostrar_logo?: boolean
+          planilla_pie?: string | null
+          planilla_subtitulo?: string | null
+          planilla_titulo?: string | null
+          senal_en_vivo_activa?: boolean | null
+          senal_en_vivo_url?: string | null
+          sitio_web?: string | null
+          telefono?: string | null
+          tema_semana_descripcion?: string | null
+          tema_semana_pdf_url?: string | null
+          tema_semana_titulo?: string | null
+          tema_semana_url?: string | null
+          tesoreria_cdp_dias_mora?: number
+          tesoreria_cdp_tolerancia_abs?: number
+          tesoreria_cdp_tolerancia_pct?: number
+          updated_at?: string
+          zona_horaria?: string | null
+        }
+        Relationships: []
+      }
+      consejeros_horarios: {
+        Row: {
+          activo: boolean
+          consejero_persona_id: string
+          created_at: string
+          dia_semana: number
+          duracion_minutos: number
+          enlace_virtual: string | null
+          hora_fin: string
+          hora_inicio: string
+          id: string
+          lugar: string | null
+          modalidad: string
+          updated_at: string
+        }
+        Insert: {
+          activo?: boolean
+          consejero_persona_id: string
+          created_at?: string
+          dia_semana: number
+          duracion_minutos?: number
+          enlace_virtual?: string | null
+          hora_fin: string
+          hora_inicio: string
+          id?: string
+          lugar?: string | null
+          modalidad?: string
+          updated_at?: string
+        }
+        Update: {
+          activo?: boolean
+          consejero_persona_id?: string
+          created_at?: string
+          dia_semana?: number
+          duracion_minutos?: number
+          enlace_virtual?: string | null
+          hora_fin?: string
+          hora_inicio?: string
+          id?: string
+          lugar?: string | null
+          modalidad?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      cortes_academicos: {
+        Row: {
+          created_at: string
+          fecha_fin: string | null
+          fecha_inicio: string | null
+          id: string
+          nombre: string
+          numero: number
+          periodo_id: string
+          porcentaje: number
+        }
+        Insert: {
+          created_at?: string
+          fecha_fin?: string | null
+          fecha_inicio?: string | null
+          id?: string
+          nombre: string
+          numero?: number
+          periodo_id: string
+          porcentaje?: number
+        }
+        Update: {
+          created_at?: string
+          fecha_fin?: string | null
+          fecha_inicio?: string | null
+          id?: string
+          nombre?: string
+          numero?: number
+          periodo_id?: string
+          porcentaje?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cortes_academicos_periodo_id_fkey"
+            columns: ["periodo_id"]
+            isOneToOne: false
+            referencedRelation: "periodos_academicos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      cumple_recordatorios: {
+        Row: {
+          activo: boolean
+          created_at: string
+          created_by: string | null
+          created_by_email: string | null
+          id: string
+          nota: string | null
+          persona_id: string
+          recordar_dias_antes: number
+          updated_at: string
+        }
+        Insert: {
+          activo?: boolean
+          created_at?: string
+          created_by?: string | null
+          created_by_email?: string | null
+          id?: string
+          nota?: string | null
+          persona_id: string
+          recordar_dias_antes?: number
+          updated_at?: string
+        }
+        Update: {
+          activo?: boolean
+          created_at?: string
+          created_by?: string | null
+          created_by_email?: string | null
+          id?: string
+          nota?: string | null
+          persona_id?: string
+          recordar_dias_antes?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cumple_recordatorios_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      cursos: {
+        Row: {
+          created_at: string
+          cupos: number | null
+          descripcion: string | null
+          duracion_semanas: number | null
+          estado: string
+          fecha_fin: string | null
+          fecha_inicio: string | null
+          id: string
+          instructor: string | null
+          nombre: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          cupos?: number | null
+          descripcion?: string | null
+          duracion_semanas?: number | null
+          estado?: string
+          fecha_fin?: string | null
+          fecha_inicio?: string | null
+          id?: string
+          instructor?: string | null
+          nombre: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          cupos?: number | null
+          descripcion?: string | null
+          duracion_semanas?: number | null
+          estado?: string
+          fecha_fin?: string | null
+          fecha_inicio?: string | null
+          id?: string
+          instructor?: string | null
+          nombre?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      discipulando_access_log: {
+        Row: {
+          action: string
+          created_at: string
+          error_message: string | null
+          id: string
+          target_url: string | null
+          user_agent: string | null
+          user_email: string | null
+          user_id: string | null
+        }
+        Insert: {
+          action: string
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          target_url?: string | null
+          user_agent?: string | null
+          user_email?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          action?: string
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          target_url?: string | null
+          user_agent?: string | null
+          user_email?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      discipulo_actividades: {
+        Row: {
+          created_at: string
+          descripcion: string
+          discipulo_id: string
+          fecha: string
+          hora: string | null
+          id: string
+          lider_id: string
+          referencia_id: string | null
+          tipo_actividad: string
+        }
+        Insert: {
+          created_at?: string
+          descripcion: string
+          discipulo_id: string
+          fecha?: string
+          hora?: string | null
+          id?: string
+          lider_id: string
+          referencia_id?: string | null
+          tipo_actividad: string
+        }
+        Update: {
+          created_at?: string
+          descripcion?: string
+          discipulo_id?: string
+          fecha?: string
+          hora?: string | null
+          id?: string
+          lider_id?: string
+          referencia_id?: string | null
+          tipo_actividad?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discipulo_actividades_discipulo_id_fkey"
+            columns: ["discipulo_id"]
+            isOneToOne: false
+            referencedRelation: "discipulos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discipulo_actividades_lider_id_fkey"
+            columns: ["lider_id"]
+            isOneToOne: false
+            referencedRelation: "leaders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      discipulo_visitas: {
+        Row: {
+          compromiso: string | null
+          created_at: string
+          direccion: string | null
+          discipulo_id: string
+          enseno: boolean
+          fecha: string
+          hora: string | null
+          id: string
+          lider_id: string
+          lugar: string
+          observaciones: string | null
+          oro: boolean
+          proximo_seguimiento: string | null
+          realizada: boolean
+          ungio_casa: string
+          updated_at: string
+        }
+        Insert: {
+          compromiso?: string | null
+          created_at?: string
+          direccion?: string | null
+          discipulo_id: string
+          enseno?: boolean
+          fecha?: string
+          hora?: string | null
+          id?: string
+          lider_id: string
+          lugar: string
+          observaciones?: string | null
+          oro?: boolean
+          proximo_seguimiento?: string | null
+          realizada?: boolean
+          ungio_casa?: string
+          updated_at?: string
+        }
+        Update: {
+          compromiso?: string | null
+          created_at?: string
+          direccion?: string | null
+          discipulo_id?: string
+          enseno?: boolean
+          fecha?: string
+          hora?: string | null
+          id?: string
+          lider_id?: string
+          lugar?: string
+          observaciones?: string | null
+          oro?: boolean
+          proximo_seguimiento?: string | null
+          realizada?: boolean
+          ungio_casa?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discipulo_visitas_discipulo_id_fkey"
+            columns: ["discipulo_id"]
+            isOneToOne: false
+            referencedRelation: "discipulos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discipulo_visitas_lider_id_fkey"
+            columns: ["lider_id"]
+            isOneToOne: false
+            referencedRelation: "leaders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      discipulos: {
+        Row: {
+          casa_de_paz_id: string | null
+          created_at: string
+          full_name: string
+          id: string
+          last_update_at: string | null
+          lider_id: string | null
+          notes: string | null
+          start_date: string | null
+          status: string
+          telefono: string | null
+          updated_at: string
+        }
+        Insert: {
+          casa_de_paz_id?: string | null
+          created_at?: string
+          full_name: string
+          id?: string
+          last_update_at?: string | null
+          lider_id?: string | null
+          notes?: string | null
+          start_date?: string | null
+          status?: string
+          telefono?: string | null
+          updated_at?: string
+        }
+        Update: {
+          casa_de_paz_id?: string | null
+          created_at?: string
+          full_name?: string
+          id?: string
+          last_update_at?: string | null
+          lider_id?: string | null
+          notes?: string | null
+          start_date?: string | null
+          status?: string
+          telefono?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discipulos_casa_de_paz_id_fkey"
+            columns: ["casa_de_paz_id"]
+            isOneToOne: false
+            referencedRelation: "grupos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discipulos_lider_id_fkey"
+            columns: ["lider_id"]
+            isOneToOne: false
+            referencedRelation: "leaders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      donaciones: {
+        Row: {
+          created_at: string
+          descripcion: string | null
+          estado: string | null
+          fecha: string
+          id: string
+          metodo_pago: string | null
+          monto: number
+          persona_id: string | null
+          tipo: string | null
+        }
+        Insert: {
+          created_at?: string
+          descripcion?: string | null
+          estado?: string | null
+          fecha?: string
+          id?: string
+          metodo_pago?: string | null
+          monto: number
+          persona_id?: string | null
+          tipo?: string | null
+        }
+        Update: {
+          created_at?: string
+          descripcion?: string | null
+          estado?: string | null
+          fecha?: string
+          id?: string
+          metodo_pago?: string | null
+          monto?: number
+          persona_id?: string | null
+          tipo?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "donaciones_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      doxa_chat_shares: {
+        Row: {
+          created_at: string
+          expires_at: string
+          id: string
+          messages: Json
+          owner_user_id: string
+          thread_id: string
+          title: string
+          token: string
+        }
+        Insert: {
+          created_at?: string
+          expires_at: string
+          id?: string
+          messages?: Json
+          owner_user_id: string
+          thread_id: string
+          title?: string
+          token: string
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string
+          id?: string
+          messages?: Json
+          owner_user_id?: string
+          thread_id?: string
+          title?: string
+          token?: string
+        }
+        Relationships: []
+      }
+      doxa_chat_threads: {
+        Row: {
+          created_at: string
+          id: string
+          messages: Json
+          pinned: boolean
+          title: string
+          updated_at: string
+          updated_at_ms: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id: string
+          messages?: Json
+          pinned?: boolean
+          title?: string
+          updated_at?: string
+          updated_at_ms?: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          messages?: Json
+          pinned?: boolean
+          title?: string
+          updated_at?: string
+          updated_at_ms?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
+      email_send_log: {
+        Row: {
+          created_at: string
+          error_message: string | null
+          id: string
+          message_id: string | null
+          metadata: Json | null
+          recipient_email: string
+          status: string
+          template_name: string
+        }
+        Insert: {
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          message_id?: string | null
+          metadata?: Json | null
+          recipient_email: string
+          status: string
+          template_name: string
+        }
+        Update: {
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          message_id?: string | null
+          metadata?: Json | null
+          recipient_email?: string
+          status?: string
+          template_name?: string
+        }
+        Relationships: []
+      }
+      email_send_state: {
+        Row: {
+          auth_email_ttl_minutes: number
+          batch_size: number
+          id: number
+          retry_after_until: string | null
+          send_delay_ms: number
+          transactional_email_ttl_minutes: number
+          updated_at: string
+        }
+        Insert: {
+          auth_email_ttl_minutes?: number
+          batch_size?: number
+          id?: number
+          retry_after_until?: string | null
+          send_delay_ms?: number
+          transactional_email_ttl_minutes?: number
+          updated_at?: string
+        }
+        Update: {
+          auth_email_ttl_minutes?: number
+          batch_size?: number
+          id?: number
+          retry_after_until?: string | null
+          send_delay_ms?: number
+          transactional_email_ttl_minutes?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      email_unsubscribe_tokens: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          token: string
+          used_at: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          token: string
+          used_at?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          token?: string
+          used_at?: string | null
+        }
+        Relationships: []
+      }
+      equipos_ministeriales: {
+        Row: {
+          created_at: string
+          descripcion: string | null
+          estado: string
+          id: string
+          lider_id: string | null
+          lider2_id: string | null
+          nombre: string
+          parent_id: string | null
+          red: string | null
+          tipo: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          descripcion?: string | null
+          estado?: string
+          id?: string
+          lider_id?: string | null
+          lider2_id?: string | null
+          nombre: string
+          parent_id?: string | null
+          red?: string | null
+          tipo?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          descripcion?: string | null
+          estado?: string
+          id?: string
+          lider_id?: string | null
+          lider2_id?: string | null
+          nombre?: string
+          parent_id?: string | null
+          red?: string | null
+          tipo?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "equipos_ministeriales_lider_id_fkey"
+            columns: ["lider_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "equipos_ministeriales_lider2_id_fkey"
+            columns: ["lider2_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "equipos_ministeriales_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "equipos_ministeriales"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      etapas_discipulado: {
+        Row: {
+          code: string
+          label: string
+          order_num: number
+        }
+        Insert: {
+          code: string
+          label: string
+          order_num: number
+        }
+        Update: {
+          code?: string
+          label?: string
+          order_num?: number
+        }
+        Relationships: []
+      }
+      evento_categorias: {
+        Row: {
+          aforo: number | null
+          created_at: string
+          evento_id: string
+          id: string
+          inscritos: number | null
+          nombre: string
+        }
+        Insert: {
+          aforo?: number | null
+          created_at?: string
+          evento_id: string
+          id?: string
+          inscritos?: number | null
+          nombre: string
+        }
+        Update: {
+          aforo?: number | null
+          created_at?: string
+          evento_id?: string
+          id?: string
+          inscritos?: number | null
+          nombre?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "evento_categorias_evento_id_fkey"
+            columns: ["evento_id"]
+            isOneToOne: false
+            referencedRelation: "eventos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      evento_encargados: {
+        Row: {
+          created_at: string
+          evento_id: string
+          id: string
+          persona_id: string
+          rol: string | null
+        }
+        Insert: {
+          created_at?: string
+          evento_id: string
+          id?: string
+          persona_id: string
+          rol?: string | null
+        }
+        Update: {
+          created_at?: string
+          evento_id?: string
+          id?: string
+          persona_id?: string
+          rol?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "evento_encargados_evento_id_fkey"
+            columns: ["evento_id"]
+            isOneToOne: false
+            referencedRelation: "eventos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "evento_encargados_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      evento_servidores: {
+        Row: {
+          clasificacion: string | null
+          created_at: string
+          evento_id: string
+          id: string
+          persona_id: string
+        }
+        Insert: {
+          clasificacion?: string | null
+          created_at?: string
+          evento_id: string
+          id?: string
+          persona_id: string
+        }
+        Update: {
+          clasificacion?: string | null
+          created_at?: string
+          evento_id?: string
+          id?: string
+          persona_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "evento_servidores_evento_id_fkey"
+            columns: ["evento_id"]
+            isOneToOne: false
+            referencedRelation: "eventos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "evento_servidores_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      eventos: {
+        Row: {
+          color: string | null
+          created_at: string
+          cupos: number | null
+          descripcion: string | null
+          estado: string
+          fecha_cierre_inscripciones: string | null
+          fecha_fin: string | null
+          fecha_inicio: string
+          id: string
+          lugar: string | null
+          motivo_cancelacion: string | null
+          nombre: string
+          tipo: string | null
+          updated_at: string
+        }
+        Insert: {
+          color?: string | null
+          created_at?: string
+          cupos?: number | null
+          descripcion?: string | null
+          estado?: string
+          fecha_cierre_inscripciones?: string | null
+          fecha_fin?: string | null
+          fecha_inicio: string
+          id?: string
+          lugar?: string | null
+          motivo_cancelacion?: string | null
+          nombre: string
+          tipo?: string | null
+          updated_at?: string
+        }
+        Update: {
+          color?: string | null
+          created_at?: string
+          cupos?: number | null
+          descripcion?: string | null
+          estado?: string
+          fecha_cierre_inscripciones?: string | null
+          fecha_fin?: string | null
+          fecha_inicio?: string
+          id?: string
+          lugar?: string | null
+          motivo_cancelacion?: string | null
+          nombre?: string
+          tipo?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      export_audit_log: {
+        Row: {
+          created_at: string
+          filename: string
+          filters: Json
+          format: string
+          id: string
+          row_count: number
+          title: string | null
+          user_email: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          filename: string
+          filters?: Json
+          format: string
+          id?: string
+          row_count?: number
+          title?: string | null
+          user_email?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          filename?: string
+          filters?: Json
+          format?: string
+          id?: string
+          row_count?: number
+          title?: string | null
+          user_email?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      finanzas: {
+        Row: {
+          categoria_id: string | null
+          categoria_nombre: string | null
+          codigo_puc: string | null
+          comprobante: string | null
+          created_at: string
+          descripcion: string | null
+          fecha: string
+          id: string
+          metodo_pago: string | null
+          monto: number
+          persona_id: string | null
+          registrado_por: string | null
+          tipo: Database["public"]["Enums"]["tipo_finanza"]
+          updated_at: string
+        }
+        Insert: {
+          categoria_id?: string | null
+          categoria_nombre?: string | null
+          codigo_puc?: string | null
+          comprobante?: string | null
+          created_at?: string
+          descripcion?: string | null
+          fecha: string
+          id?: string
+          metodo_pago?: string | null
+          monto: number
+          persona_id?: string | null
+          registrado_por?: string | null
+          tipo: Database["public"]["Enums"]["tipo_finanza"]
+          updated_at?: string
+        }
+        Update: {
+          categoria_id?: string | null
+          categoria_nombre?: string | null
+          codigo_puc?: string | null
+          comprobante?: string | null
+          created_at?: string
+          descripcion?: string | null
+          fecha?: string
+          id?: string
+          metodo_pago?: string | null
+          monto?: number
+          persona_id?: string | null
+          registrado_por?: string | null
+          tipo?: Database["public"]["Enums"]["tipo_finanza"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "finanzas_categoria_id_fkey"
+            columns: ["categoria_id"]
+            isOneToOne: false
+            referencedRelation: "categorias_financieras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "finanzas_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      firma_audit: {
+        Row: {
+          accion: string
+          asistencia_id: string | null
+          created_at: string
+          firma_preview: string | null
+          firmada_por: string | null
+          firmada_por_email: string | null
+          id: string
+          ip: unknown
+          persona_id: string
+          servicio_id: string
+          user_agent: string | null
+        }
+        Insert: {
+          accion: string
+          asistencia_id?: string | null
+          created_at?: string
+          firma_preview?: string | null
+          firmada_por?: string | null
+          firmada_por_email?: string | null
+          id?: string
+          ip?: unknown
+          persona_id: string
+          servicio_id: string
+          user_agent?: string | null
+        }
+        Update: {
+          accion?: string
+          asistencia_id?: string | null
+          created_at?: string
+          firma_preview?: string | null
+          firmada_por?: string | null
+          firmada_por_email?: string | null
+          id?: string
+          ip?: unknown
+          persona_id?: string
+          servicio_id?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
+      grupo_miembros: {
+        Row: {
+          created_at: string
+          grupo_id: string
+          id: string
+          persona_id: string
+          rol: string | null
+        }
+        Insert: {
+          created_at?: string
+          grupo_id: string
+          id?: string
+          persona_id: string
+          rol?: string | null
+        }
+        Update: {
+          created_at?: string
+          grupo_id?: string
+          id?: string
+          persona_id?: string
+          rol?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "grupo_miembros_grupo_id_fkey"
+            columns: ["grupo_id"]
+            isOneToOne: false
+            referencedRelation: "grupos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "grupo_miembros_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      grupos: {
+        Row: {
+          created_at: string
+          descripcion: string | null
+          dia_reunion: string | null
+          estado: string
+          hora_reunion: string | null
+          id: string
+          latitud: number | null
+          lider_id: string | null
+          longitud: number | null
+          nombre: string
+          red: string | null
+          tipo: Database["public"]["Enums"]["tipo_grupo"]
+          ubicacion: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          descripcion?: string | null
+          dia_reunion?: string | null
+          estado?: string
+          hora_reunion?: string | null
+          id?: string
+          latitud?: number | null
+          lider_id?: string | null
+          longitud?: number | null
+          nombre: string
+          red?: string | null
+          tipo: Database["public"]["Enums"]["tipo_grupo"]
+          ubicacion?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          descripcion?: string | null
+          dia_reunion?: string | null
+          estado?: string
+          hora_reunion?: string | null
+          id?: string
+          latitud?: number | null
+          lider_id?: string | null
+          longitud?: number | null
+          nombre?: string
+          red?: string | null
+          tipo?: Database["public"]["Enums"]["tipo_grupo"]
+          ubicacion?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "grupos_lider_id_fkey"
+            columns: ["lider_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      homologaciones: {
+        Row: {
+          calificacion_obtenida: number | null
+          created_at: string
+          fecha_homologacion: string
+          id: string
+          institucion_origen: string
+          materia_id: string | null
+          materia_nombre: string
+          observaciones: string | null
+          persona_id: string
+        }
+        Insert: {
+          calificacion_obtenida?: number | null
+          created_at?: string
+          fecha_homologacion?: string
+          id?: string
+          institucion_origen: string
+          materia_id?: string | null
+          materia_nombre: string
+          observaciones?: string | null
+          persona_id: string
+        }
+        Update: {
+          calificacion_obtenida?: number | null
+          created_at?: string
+          fecha_homologacion?: string
+          id?: string
+          institucion_origen?: string
+          materia_id?: string | null
+          materia_nombre?: string
+          observaciones?: string | null
+          persona_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "homologaciones_materia_id_fkey"
+            columns: ["materia_id"]
+            isOneToOne: false
+            referencedRelation: "materias"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "homologaciones_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      infantil_acudientes: {
+        Row: {
+          acudiente_id: string
+          autorizado_recoger: boolean
+          created_at: string
+          es_principal: boolean
+          id: string
+          nino_id: string
+          relacion: string
+        }
+        Insert: {
+          acudiente_id: string
+          autorizado_recoger?: boolean
+          created_at?: string
+          es_principal?: boolean
+          id?: string
+          nino_id: string
+          relacion: string
+        }
+        Update: {
+          acudiente_id?: string
+          autorizado_recoger?: boolean
+          created_at?: string
+          es_principal?: boolean
+          id?: string
+          nino_id?: string
+          relacion?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "infantil_acudientes_acudiente_id_fkey"
+            columns: ["acudiente_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "infantil_acudientes_nino_id_fkey"
+            columns: ["nino_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      infantil_asistencia_checkin: {
+        Row: {
+          clase_id: string | null
+          created_at: string
+          entregado_por_id: string | null
+          estado: string
+          fecha: string
+          grupo_id: string
+          hora_entrada: string | null
+          hora_salida: string | null
+          id: string
+          nino_id: string
+          observaciones: string | null
+          recogido_por_id: string | null
+          registrado_entrada_por: string | null
+          registrado_salida_por: string | null
+          servicio_id: string | null
+        }
+        Insert: {
+          clase_id?: string | null
+          created_at?: string
+          entregado_por_id?: string | null
+          estado?: string
+          fecha: string
+          grupo_id: string
+          hora_entrada?: string | null
+          hora_salida?: string | null
+          id?: string
+          nino_id: string
+          observaciones?: string | null
+          recogido_por_id?: string | null
+          registrado_entrada_por?: string | null
+          registrado_salida_por?: string | null
+          servicio_id?: string | null
+        }
+        Update: {
+          clase_id?: string | null
+          created_at?: string
+          entregado_por_id?: string | null
+          estado?: string
+          fecha?: string
+          grupo_id?: string
+          hora_entrada?: string | null
+          hora_salida?: string | null
+          id?: string
+          nino_id?: string
+          observaciones?: string | null
+          recogido_por_id?: string | null
+          registrado_entrada_por?: string | null
+          registrado_salida_por?: string | null
+          servicio_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "infantil_asistencia_checkin_clase_id_fkey"
+            columns: ["clase_id"]
+            isOneToOne: false
+            referencedRelation: "infantil_clases"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "infantil_asistencia_checkin_entregado_por_id_fkey"
+            columns: ["entregado_por_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "infantil_asistencia_checkin_grupo_id_fkey"
+            columns: ["grupo_id"]
+            isOneToOne: false
+            referencedRelation: "grupos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "infantil_asistencia_checkin_nino_id_fkey"
+            columns: ["nino_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "infantil_asistencia_checkin_recogido_por_id_fkey"
+            columns: ["recogido_por_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "infantil_asistencia_checkin_servicio_id_fkey"
+            columns: ["servicio_id"]
+            isOneToOne: false
+            referencedRelation: "servicios"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      infantil_clases: {
+        Row: {
+          actividad: string | null
+          created_at: string
+          estado: string
+          fecha: string
+          grupo_id: string
+          id: string
+          maestro_id: string | null
+          materiales: string | null
+          objetivo: string | null
+          observaciones: string | null
+          tema: string | null
+          updated_at: string
+          versiculo: string | null
+        }
+        Insert: {
+          actividad?: string | null
+          created_at?: string
+          estado?: string
+          fecha: string
+          grupo_id: string
+          id?: string
+          maestro_id?: string | null
+          materiales?: string | null
+          objetivo?: string | null
+          observaciones?: string | null
+          tema?: string | null
+          updated_at?: string
+          versiculo?: string | null
+        }
+        Update: {
+          actividad?: string | null
+          created_at?: string
+          estado?: string
+          fecha?: string
+          grupo_id?: string
+          id?: string
+          maestro_id?: string | null
+          materiales?: string | null
+          objetivo?: string | null
+          observaciones?: string | null
+          tema?: string | null
+          updated_at?: string
+          versiculo?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "infantil_clases_grupo_id_fkey"
+            columns: ["grupo_id"]
+            isOneToOne: false
+            referencedRelation: "grupos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "infantil_clases_maestro_id_fkey"
+            columns: ["maestro_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      infantil_detalles: {
+        Row: {
+          alergias: string | null
+          codigo_interno: string | null
+          contacto_emergencia: string | null
+          created_at: string
+          fecha_primera_asistencia: string | null
+          info_medica: string | null
+          observaciones: string | null
+          persona_id: string
+          qr_codigo: string | null
+          updated_at: string
+        }
+        Insert: {
+          alergias?: string | null
+          codigo_interno?: string | null
+          contacto_emergencia?: string | null
+          created_at?: string
+          fecha_primera_asistencia?: string | null
+          info_medica?: string | null
+          observaciones?: string | null
+          persona_id: string
+          qr_codigo?: string | null
+          updated_at?: string
+        }
+        Update: {
+          alergias?: string | null
+          codigo_interno?: string | null
+          contacto_emergencia?: string | null
+          created_at?: string
+          fecha_primera_asistencia?: string | null
+          info_medica?: string | null
+          observaciones?: string | null
+          persona_id?: string
+          qr_codigo?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "infantil_detalles_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: true
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      infantil_grupos_detalles: {
+        Row: {
+          capacidad: number | null
+          created_at: string
+          edad_maxima: number | null
+          edad_minima: number | null
+          grupo_id: string
+          salon: string | null
+          updated_at: string
+        }
+        Insert: {
+          capacidad?: number | null
+          created_at?: string
+          edad_maxima?: number | null
+          edad_minima?: number | null
+          grupo_id: string
+          salon?: string | null
+          updated_at?: string
+        }
+        Update: {
+          capacidad?: number | null
+          created_at?: string
+          edad_maxima?: number | null
+          edad_minima?: number | null
+          grupo_id?: string
+          salon?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "infantil_grupos_detalles_grupo_id_fkey"
+            columns: ["grupo_id"]
+            isOneToOne: true
+            referencedRelation: "grupos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      infantil_notificaciones: {
+        Row: {
+          acudiente_id: string | null
+          canal: string
+          created_at: string
+          enviado_por: string | null
+          estado: string
+          id: string
+          mensaje: string
+          nino_id: string
+          tipo: string
+        }
+        Insert: {
+          acudiente_id?: string | null
+          canal?: string
+          created_at?: string
+          enviado_por?: string | null
+          estado?: string
+          id?: string
+          mensaje: string
+          nino_id: string
+          tipo: string
+        }
+        Update: {
+          acudiente_id?: string | null
+          canal?: string
+          created_at?: string
+          enviado_por?: string | null
+          estado?: string
+          id?: string
+          mensaje?: string
+          nino_id?: string
+          tipo?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "infantil_notificaciones_acudiente_id_fkey"
+            columns: ["acudiente_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "infantil_notificaciones_nino_id_fkey"
+            columns: ["nino_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      infantil_seguimiento: {
+        Row: {
+          created_at: string
+          fecha: string
+          fecha_proximo_seguimiento: string | null
+          id: string
+          motivo: string | null
+          nino_id: string
+          observaciones: string | null
+          proxima_accion: string | null
+          responsable_id: string | null
+          resultado: string | null
+          tipo_contacto: string
+        }
+        Insert: {
+          created_at?: string
+          fecha: string
+          fecha_proximo_seguimiento?: string | null
+          id?: string
+          motivo?: string | null
+          nino_id: string
+          observaciones?: string | null
+          proxima_accion?: string | null
+          responsable_id?: string | null
+          resultado?: string | null
+          tipo_contacto: string
+        }
+        Update: {
+          created_at?: string
+          fecha?: string
+          fecha_proximo_seguimiento?: string | null
+          id?: string
+          motivo?: string | null
+          nino_id?: string
+          observaciones?: string | null
+          proxima_accion?: string | null
+          responsable_id?: string | null
+          resultado?: string | null
+          tipo_contacto?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "infantil_seguimiento_nino_id_fkey"
+            columns: ["nino_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "infantil_seguimiento_responsable_id_fkey"
+            columns: ["responsable_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      inscripciones: {
+        Row: {
+          confirmado: boolean | null
+          created_at: string
+          estado_pago: string | null
+          evento_id: string
+          id: string
+          persona_id: string
+        }
+        Insert: {
+          confirmado?: boolean | null
+          created_at?: string
+          estado_pago?: string | null
+          evento_id: string
+          id?: string
+          persona_id: string
+        }
+        Update: {
+          confirmado?: boolean | null
+          created_at?: string
+          estado_pago?: string | null
+          evento_id?: string
+          id?: string
+          persona_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "inscripciones_evento_id_fkey"
+            columns: ["evento_id"]
+            isOneToOne: false
+            referencedRelation: "eventos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "inscripciones_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      items_calificables: {
+        Row: {
+          corte_id: string
+          created_at: string
+          es_calificable: boolean
+          fecha_fin: string | null
+          fecha_inicio: string | null
+          id: string
+          materia_id: string
+          nombre: string
+          porcentaje: number | null
+          tipo: string
+          visible_estudiante: boolean
+        }
+        Insert: {
+          corte_id: string
+          created_at?: string
+          es_calificable?: boolean
+          fecha_fin?: string | null
+          fecha_inicio?: string | null
+          id?: string
+          materia_id: string
+          nombre: string
+          porcentaje?: number | null
+          tipo?: string
+          visible_estudiante?: boolean
+        }
+        Update: {
+          corte_id?: string
+          created_at?: string
+          es_calificable?: boolean
+          fecha_fin?: string | null
+          fecha_inicio?: string | null
+          id?: string
+          materia_id?: string
+          nombre?: string
+          porcentaje?: number | null
+          tipo?: string
+          visible_estudiante?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "items_calificables_corte_id_fkey"
+            columns: ["corte_id"]
+            isOneToOne: false
+            referencedRelation: "cortes_academicos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "items_calificables_materia_id_fkey"
+            columns: ["materia_id"]
+            isOneToOne: false
+            referencedRelation: "materias"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      leaders: {
+        Row: {
+          casa_de_paz_id: string | null
+          created_at: string
+          email: string | null
+          full_name: string
+          id: string
+          phone: string | null
+          update_token: string | null
+          updated_at: string
+        }
+        Insert: {
+          casa_de_paz_id?: string | null
+          created_at?: string
+          email?: string | null
+          full_name: string
+          id: string
+          phone?: string | null
+          update_token?: string | null
+          updated_at?: string
+        }
+        Update: {
+          casa_de_paz_id?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          phone?: string | null
+          update_token?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "leaders_casa_de_paz_id_fkey"
+            columns: ["casa_de_paz_id"]
+            isOneToOne: false
+            referencedRelation: "grupos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      leaders_grupos: {
+        Row: {
+          created_at: string
+          grupo_id: string
+          id: string
+          leader_id: string
+        }
+        Insert: {
+          created_at?: string
+          grupo_id: string
+          id?: string
+          leader_id: string
+        }
+        Update: {
+          created_at?: string
+          grupo_id?: string
+          id?: string
+          leader_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "leaders_grupos_grupo_id_fkey"
+            columns: ["grupo_id"]
+            isOneToOne: false
+            referencedRelation: "grupos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "leaders_grupos_leader_id_fkey"
+            columns: ["leader_id"]
+            isOneToOne: false
+            referencedRelation: "leaders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      materias: {
+        Row: {
+          alerta_inasistencias: boolean
+          asistencias_minimas: number
+          aula: string | null
+          aula_id: string | null
+          cantidad_inasistencias_alerta: number
+          codigo: string | null
+          created_at: string
+          cupos: number | null
+          descripcion: string | null
+          estado: string
+          hab_asistencia: boolean
+          hab_auto_matricula: boolean
+          hab_calificaciones: boolean
+          horario: string | null
+          id: string
+          maestro_id: string | null
+          maestro_nombre: string | null
+          nombre: string
+          periodo_id: string
+        }
+        Insert: {
+          alerta_inasistencias?: boolean
+          asistencias_minimas?: number
+          aula?: string | null
+          aula_id?: string | null
+          cantidad_inasistencias_alerta?: number
+          codigo?: string | null
+          created_at?: string
+          cupos?: number | null
+          descripcion?: string | null
+          estado?: string
+          hab_asistencia?: boolean
+          hab_auto_matricula?: boolean
+          hab_calificaciones?: boolean
+          horario?: string | null
+          id?: string
+          maestro_id?: string | null
+          maestro_nombre?: string | null
+          nombre: string
+          periodo_id: string
+        }
+        Update: {
+          alerta_inasistencias?: boolean
+          asistencias_minimas?: number
+          aula?: string | null
+          aula_id?: string | null
+          cantidad_inasistencias_alerta?: number
+          codigo?: string | null
+          created_at?: string
+          cupos?: number | null
+          descripcion?: string | null
+          estado?: string
+          hab_asistencia?: boolean
+          hab_auto_matricula?: boolean
+          hab_calificaciones?: boolean
+          horario?: string | null
+          id?: string
+          maestro_id?: string | null
+          maestro_nombre?: string | null
+          nombre?: string
+          periodo_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "materias_aula_id_fkey"
+            columns: ["aula_id"]
+            isOneToOne: false
+            referencedRelation: "aulas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "materias_maestro_id_fkey"
+            columns: ["maestro_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "materias_periodo_id_fkey"
+            columns: ["periodo_id"]
+            isOneToOne: false
+            referencedRelation: "periodos_academicos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      matriculas: {
+        Row: {
+          created_at: string
+          curso_id: string
+          estado: string
+          fecha_matricula: string
+          id: string
+          materia_id: string | null
+          nota_final: number | null
+          periodo_id: string | null
+          persona_id: string
+        }
+        Insert: {
+          created_at?: string
+          curso_id: string
+          estado?: string
+          fecha_matricula?: string
+          id?: string
+          materia_id?: string | null
+          nota_final?: number | null
+          periodo_id?: string | null
+          persona_id: string
+        }
+        Update: {
+          created_at?: string
+          curso_id?: string
+          estado?: string
+          fecha_matricula?: string
+          id?: string
+          materia_id?: string | null
+          nota_final?: number | null
+          periodo_id?: string | null
+          persona_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "matriculas_curso_id_fkey"
+            columns: ["curso_id"]
+            isOneToOne: false
+            referencedRelation: "cursos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "matriculas_materia_id_fkey"
+            columns: ["materia_id"]
+            isOneToOne: false
+            referencedRelation: "materias"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "matriculas_periodo_id_fkey"
+            columns: ["periodo_id"]
+            isOneToOne: false
+            referencedRelation: "periodos_academicos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "matriculas_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      metas_mensuales: {
+        Row: {
+          casa_de_paz_id: string | null
+          created_at: string
+          created_by: string | null
+          discipulo_id: string | null
+          id: string
+          lider_id: string | null
+          meta_etapas: number
+          meta_seguimientos: number
+          month_key: string
+          notes: string | null
+          scope_type: string
+          updated_at: string
+        }
+        Insert: {
+          casa_de_paz_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          discipulo_id?: string | null
+          id?: string
+          lider_id?: string | null
+          meta_etapas?: number
+          meta_seguimientos?: number
+          month_key: string
+          notes?: string | null
+          scope_type: string
+          updated_at?: string
+        }
+        Update: {
+          casa_de_paz_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          discipulo_id?: string | null
+          id?: string
+          lider_id?: string | null
+          meta_etapas?: number
+          meta_seguimientos?: number
+          month_key?: string
+          notes?: string | null
+          scope_type?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "metas_mensuales_casa_de_paz_id_fkey"
+            columns: ["casa_de_paz_id"]
+            isOneToOne: false
+            referencedRelation: "grupos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "metas_mensuales_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "leaders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "metas_mensuales_discipulo_id_fkey"
+            columns: ["discipulo_id"]
+            isOneToOne: false
+            referencedRelation: "discipulos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "metas_mensuales_lider_id_fkey"
+            columns: ["lider_id"]
+            isOneToOne: false
+            referencedRelation: "leaders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      msg_attachments: {
+        Row: {
+          created_at: string
+          file_name: string
+          file_path: string
+          file_size: number
+          id: string
+          message_id: string
+          mime_type: string | null
+        }
+        Insert: {
+          created_at?: string
+          file_name: string
+          file_path: string
+          file_size?: number
+          id?: string
+          message_id: string
+          mime_type?: string | null
+        }
+        Update: {
+          created_at?: string
+          file_name?: string
+          file_path?: string
+          file_size?: number
+          id?: string
+          message_id?: string
+          mime_type?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "msg_attachments_message_id_fkey"
+            columns: ["message_id"]
+            isOneToOne: false
+            referencedRelation: "msg_messages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      msg_bulk_send_log: {
+        Row: {
+          body_preview: string | null
+          created_at: string
+          errors: Json | null
+          id: string
+          recipients_count: number
+          scope_detail: Json | null
+          scope_ref: string | null
+          scope_type: string
+          sender_display: string | null
+          sender_user_id: string | null
+          subject: string | null
+          threads_created: number
+          threads_failed: number
+        }
+        Insert: {
+          body_preview?: string | null
+          created_at?: string
+          errors?: Json | null
+          id?: string
+          recipients_count?: number
+          scope_detail?: Json | null
+          scope_ref?: string | null
+          scope_type: string
+          sender_display?: string | null
+          sender_user_id?: string | null
+          subject?: string | null
+          threads_created?: number
+          threads_failed?: number
+        }
+        Update: {
+          body_preview?: string | null
+          created_at?: string
+          errors?: Json | null
+          id?: string
+          recipients_count?: number
+          scope_detail?: Json | null
+          scope_ref?: string | null
+          scope_type?: string
+          sender_display?: string | null
+          sender_user_id?: string | null
+          subject?: string | null
+          threads_created?: number
+          threads_failed?: number
+        }
+        Relationships: []
+      }
+      msg_drafts: {
+        Row: {
+          body: string
+          created_at: string
+          id: string
+          recipients: Json
+          reply_thread_id: string | null
+          subject: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          body?: string
+          created_at?: string
+          id?: string
+          recipients?: Json
+          reply_thread_id?: string | null
+          subject?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          id?: string
+          recipients?: Json
+          reply_thread_id?: string | null
+          subject?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "msg_drafts_reply_thread_id_fkey"
+            columns: ["reply_thread_id"]
+            isOneToOne: false
+            referencedRelation: "msg_threads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      msg_messages: {
+        Row: {
+          body: string
+          created_at: string
+          id: string
+          is_system: boolean
+          sender_id: string | null
+          system_sender_key: string | null
+          thread_id: string
+        }
+        Insert: {
+          body?: string
+          created_at?: string
+          id?: string
+          is_system?: boolean
+          sender_id?: string | null
+          system_sender_key?: string | null
+          thread_id: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          id?: string
+          is_system?: boolean
+          sender_id?: string | null
+          system_sender_key?: string | null
+          thread_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "msg_messages_thread_id_fkey"
+            columns: ["thread_id"]
+            isOneToOne: false
+            referencedRelation: "msg_threads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      msg_participants: {
+        Row: {
+          created_at: string
+          id: string
+          is_archived: boolean
+          is_deleted: boolean
+          is_favorite: boolean
+          is_important: boolean
+          is_read: boolean
+          last_read_at: string | null
+          role: string
+          thread_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_archived?: boolean
+          is_deleted?: boolean
+          is_favorite?: boolean
+          is_important?: boolean
+          is_read?: boolean
+          last_read_at?: string | null
+          role?: string
+          thread_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_archived?: boolean
+          is_deleted?: boolean
+          is_favorite?: boolean
+          is_important?: boolean
+          is_read?: boolean
+          last_read_at?: string | null
+          role?: string
+          thread_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "msg_participants_thread_id_fkey"
+            columns: ["thread_id"]
+            isOneToOne: false
+            referencedRelation: "msg_threads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      msg_scheduled: {
+        Row: {
+          body: string
+          created_at: string
+          error: string | null
+          id: string
+          scheduled_for: string
+          scope_ref: string | null
+          scope_type: string
+          semestre: number | null
+          sender_user_id: string | null
+          sent_at: string | null
+          status: string
+          subject: string
+          system_sender_key: string
+          thread_id: string | null
+          updated_at: string
+          user_ids: string[] | null
+          variables: Json
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          error?: string | null
+          id?: string
+          scheduled_for: string
+          scope_ref?: string | null
+          scope_type: string
+          semestre?: number | null
+          sender_user_id?: string | null
+          sent_at?: string | null
+          status?: string
+          subject: string
+          system_sender_key?: string
+          thread_id?: string | null
+          updated_at?: string
+          user_ids?: string[] | null
+          variables?: Json
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          error?: string | null
+          id?: string
+          scheduled_for?: string
+          scope_ref?: string | null
+          scope_type?: string
+          semestre?: number | null
+          sender_user_id?: string | null
+          sent_at?: string | null
+          status?: string
+          subject?: string
+          system_sender_key?: string
+          thread_id?: string | null
+          updated_at?: string
+          user_ids?: string[] | null
+          variables?: Json
+        }
+        Relationships: []
+      }
+      msg_system_senders: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          description: string | null
+          display_name: string
+          key: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          description?: string | null
+          display_name: string
+          key: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          description?: string | null
+          display_name?: string
+          key?: string
+        }
+        Relationships: []
+      }
+      msg_templates: {
+        Row: {
+          body: string
+          category: string | null
+          created_at: string
+          created_by: string | null
+          id: string
+          is_shared: boolean
+          name: string
+          subject: string
+          updated_at: string
+          variables: string[]
+        }
+        Insert: {
+          body: string
+          category?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          is_shared?: boolean
+          name: string
+          subject: string
+          updated_at?: string
+          variables?: string[]
+        }
+        Update: {
+          body?: string
+          category?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          is_shared?: boolean
+          name?: string
+          subject?: string
+          updated_at?: string
+          variables?: string[]
+        }
+        Relationships: []
+      }
+      msg_threads: {
+        Row: {
+          created_at: string
+          created_by: string
+          id: string
+          last_message_at: string
+          subject: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          id?: string
+          last_message_at?: string
+          subject?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          id?: string
+          last_message_at?: string
+          subject?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      notification_preferences: {
+        Row: {
+          created_at: string
+          enabled: boolean
+          id: string
+          pref_key: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          enabled?: boolean
+          id?: string
+          pref_key: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          enabled?: boolean
+          id?: string
+          pref_key?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      notification_role_preferences: {
+        Row: {
+          created_at: string
+          enabled: boolean
+          id: string
+          pref_key: string
+          role: Database["public"]["Enums"]["app_role"]
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          enabled?: boolean
+          id?: string
+          pref_key: string
+          role: Database["public"]["Enums"]["app_role"]
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          enabled?: boolean
+          id?: string
+          pref_key?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      observaciones_consejeria: {
+        Row: {
+          cita_id: string
+          created_at: string
+          created_by: string | null
+          estado_caso: string
+          fecha_seguimiento: string | null
+          id: string
+          notas: string | null
+          proxima_accion: string | null
+          updated_at: string
+        }
+        Insert: {
+          cita_id: string
+          created_at?: string
+          created_by?: string | null
+          estado_caso?: string
+          fecha_seguimiento?: string | null
+          id?: string
+          notas?: string | null
+          proxima_accion?: string | null
+          updated_at?: string
+        }
+        Update: {
+          cita_id?: string
+          created_at?: string
+          created_by?: string | null
+          estado_caso?: string
+          fecha_seguimiento?: string | null
+          id?: string
+          notas?: string | null
+          proxima_accion?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "observaciones_consejeria_cita_id_fkey"
+            columns: ["cita_id"]
+            isOneToOne: false
+            referencedRelation: "citas_consejeria"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pagos_matricula: {
+        Row: {
+          concepto_pago_id: string
+          created_at: string
+          estado: string
+          fecha_pago: string | null
+          id: string
+          matricula_id: string
+          monto_pagado: number | null
+        }
+        Insert: {
+          concepto_pago_id: string
+          created_at?: string
+          estado?: string
+          fecha_pago?: string | null
+          id?: string
+          matricula_id: string
+          monto_pagado?: number | null
+        }
+        Update: {
+          concepto_pago_id?: string
+          created_at?: string
+          estado?: string
+          fecha_pago?: string | null
+          id?: string
+          matricula_id?: string
+          monto_pagado?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pagos_matricula_concepto_pago_id_fkey"
+            columns: ["concepto_pago_id"]
+            isOneToOne: false
+            referencedRelation: "conceptos_pago"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pagos_matricula_matricula_id_fkey"
+            columns: ["matricula_id"]
+            isOneToOne: false
+            referencedRelation: "matriculas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      periodos_academicos: {
+        Row: {
+          created_at: string
+          escuela_id: string
+          estado: string
+          fecha_fin: string | null
+          fecha_inicio: string | null
+          fecha_matricula_fin: string | null
+          fecha_matricula_inicio: string | null
+          id: string
+          nombre: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          escuela_id: string
+          estado?: string
+          fecha_fin?: string | null
+          fecha_inicio?: string | null
+          fecha_matricula_fin?: string | null
+          fecha_matricula_inicio?: string | null
+          id?: string
+          nombre: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          escuela_id?: string
+          estado?: string
+          fecha_fin?: string | null
+          fecha_inicio?: string | null
+          fecha_matricula_fin?: string | null
+          fecha_matricula_inicio?: string | null
+          id?: string
+          nombre?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "periodos_academicos_escuela_id_fkey"
+            columns: ["escuela_id"]
+            isOneToOne: false
+            referencedRelation: "cursos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      persona_procesos: {
+        Row: {
+          created_at: string
+          estado: string
+          fecha_completado: string | null
+          id: string
+          observacion: string | null
+          persona_id: string
+          proceso_id: string
+        }
+        Insert: {
+          created_at?: string
+          estado?: string
+          fecha_completado?: string | null
+          id?: string
+          observacion?: string | null
+          persona_id: string
+          proceso_id: string
+        }
+        Update: {
+          created_at?: string
+          estado?: string
+          fecha_completado?: string | null
+          id?: string
+          observacion?: string | null
+          persona_id?: string
+          proceso_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "persona_procesos_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "persona_procesos_proceso_id_fkey"
+            columns: ["proceso_id"]
+            isOneToOne: false
+            referencedRelation: "procesos_crecimiento"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      personas: {
+        Row: {
+          apellidos: string
+          created_at: string
+          direccion: string | null
+          documento: string | null
+          email: string | null
+          estado_civil: string | null
+          estado_iglesia: Database["public"]["Enums"]["estado_iglesia"]
+          fecha_bautismo: string | null
+          fecha_conversion: string | null
+          fecha_ingreso: string | null
+          fecha_nacimiento: string | null
+          foto_url: string | null
+          grupo_id: string | null
+          id: string
+          invitado_por: string | null
+          lider_responsable: string | null
+          ministerio: string | null
+          nacionalidad: string | null
+          nombres: string
+          observaciones: string | null
+          ocupacion: string | null
+          qr_code: string | null
+          seguimiento_por: string | null
+          sexo: string | null
+          telefono: string | null
+          tipo_documento: string | null
+          tipo_persona: Database["public"]["Enums"]["tipo_persona"]
+          tipos_persona: string[] | null
+          updated_at: string
+          vinculacion: string | null
+          whatsapp: string | null
+        }
+        Insert: {
+          apellidos: string
+          created_at?: string
+          direccion?: string | null
+          documento?: string | null
+          email?: string | null
+          estado_civil?: string | null
+          estado_iglesia?: Database["public"]["Enums"]["estado_iglesia"]
+          fecha_bautismo?: string | null
+          fecha_conversion?: string | null
+          fecha_ingreso?: string | null
+          fecha_nacimiento?: string | null
+          foto_url?: string | null
+          grupo_id?: string | null
+          id?: string
+          invitado_por?: string | null
+          lider_responsable?: string | null
+          ministerio?: string | null
+          nacionalidad?: string | null
+          nombres: string
+          observaciones?: string | null
+          ocupacion?: string | null
+          qr_code?: string | null
+          seguimiento_por?: string | null
+          sexo?: string | null
+          telefono?: string | null
+          tipo_documento?: string | null
+          tipo_persona?: Database["public"]["Enums"]["tipo_persona"]
+          tipos_persona?: string[] | null
+          updated_at?: string
+          vinculacion?: string | null
+          whatsapp?: string | null
+        }
+        Update: {
+          apellidos?: string
+          created_at?: string
+          direccion?: string | null
+          documento?: string | null
+          email?: string | null
+          estado_civil?: string | null
+          estado_iglesia?: Database["public"]["Enums"]["estado_iglesia"]
+          fecha_bautismo?: string | null
+          fecha_conversion?: string | null
+          fecha_ingreso?: string | null
+          fecha_nacimiento?: string | null
+          foto_url?: string | null
+          grupo_id?: string | null
+          id?: string
+          invitado_por?: string | null
+          lider_responsable?: string | null
+          ministerio?: string | null
+          nacionalidad?: string | null
+          nombres?: string
+          observaciones?: string | null
+          ocupacion?: string | null
+          qr_code?: string | null
+          seguimiento_por?: string | null
+          sexo?: string | null
+          telefono?: string | null
+          tipo_documento?: string | null
+          tipo_persona?: Database["public"]["Enums"]["tipo_persona"]
+          tipos_persona?: string[] | null
+          updated_at?: string
+          vinculacion?: string | null
+          whatsapp?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_personas_grupo"
+            columns: ["grupo_id"]
+            isOneToOne: false
+            referencedRelation: "grupos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      peticiones_oracion: {
+        Row: {
+          created_at: string
+          descripcion: string | null
+          estado: string
+          fecha_respuesta: string | null
+          fecha_seguimiento: string | null
+          id: string
+          notas_seguimiento: string | null
+          persona_id: string | null
+          prioridad: string
+          tipo: string | null
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          descripcion?: string | null
+          estado?: string
+          fecha_respuesta?: string | null
+          fecha_seguimiento?: string | null
+          id?: string
+          notas_seguimiento?: string | null
+          persona_id?: string | null
+          prioridad?: string
+          tipo?: string | null
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          descripcion?: string | null
+          estado?: string
+          fecha_respuesta?: string | null
+          fecha_seguimiento?: string | null
+          id?: string
+          notas_seguimiento?: string | null
+          persona_id?: string | null
+          prioridad?: string
+          tipo?: string | null
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "peticiones_oracion_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      planificaciones_grupo: {
+        Row: {
+          casa_de_paz: string | null
+          created_at: string
+          created_by: string | null
+          evaluacion_equipo: Json | null
+          fecha_ayuno: string | null
+          fecha_evangelizacion: string | null
+          grupo_id: string
+          id: string
+          lider_nombre: string
+          medios_invitacion: string[] | null
+          medios_recordar: string[] | null
+          personas_invitadas: number | null
+          red: string | null
+          responsable_adoracion: string | null
+          responsable_ayudas: string | null
+          responsable_consolidacion: string | null
+          responsable_datos: string | null
+          responsable_dinamicas: string | null
+          responsable_invitacion: string | null
+          responsable_oracion: string | null
+          responsable_predicacion: string | null
+          responsable_recordar: string | null
+          responsable_seguimiento: string | null
+          responsable_testimonios: string | null
+        }
+        Insert: {
+          casa_de_paz?: string | null
+          created_at?: string
+          created_by?: string | null
+          evaluacion_equipo?: Json | null
+          fecha_ayuno?: string | null
+          fecha_evangelizacion?: string | null
+          grupo_id: string
+          id?: string
+          lider_nombre: string
+          medios_invitacion?: string[] | null
+          medios_recordar?: string[] | null
+          personas_invitadas?: number | null
+          red?: string | null
+          responsable_adoracion?: string | null
+          responsable_ayudas?: string | null
+          responsable_consolidacion?: string | null
+          responsable_datos?: string | null
+          responsable_dinamicas?: string | null
+          responsable_invitacion?: string | null
+          responsable_oracion?: string | null
+          responsable_predicacion?: string | null
+          responsable_recordar?: string | null
+          responsable_seguimiento?: string | null
+          responsable_testimonios?: string | null
+        }
+        Update: {
+          casa_de_paz?: string | null
+          created_at?: string
+          created_by?: string | null
+          evaluacion_equipo?: Json | null
+          fecha_ayuno?: string | null
+          fecha_evangelizacion?: string | null
+          grupo_id?: string
+          id?: string
+          lider_nombre?: string
+          medios_invitacion?: string[] | null
+          medios_recordar?: string[] | null
+          personas_invitadas?: number | null
+          red?: string | null
+          responsable_adoracion?: string | null
+          responsable_ayudas?: string | null
+          responsable_consolidacion?: string | null
+          responsable_datos?: string | null
+          responsable_dinamicas?: string | null
+          responsable_invitacion?: string | null
+          responsable_oracion?: string | null
+          responsable_predicacion?: string | null
+          responsable_recordar?: string | null
+          responsable_seguimiento?: string | null
+          responsable_testimonios?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "planificaciones_grupo_grupo_id_fkey"
+            columns: ["grupo_id"]
+            isOneToOne: false
+            referencedRelation: "grupos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      planilla_historial: {
+        Row: {
+          content_hash: string | null
+          content_ref: string | null
+          created_at: string
+          formato: string
+          generada_por: string
+          generada_por_email: string | null
+          id: string
+          motivo: string | null
+          parametros: Json
+          parent_id: string | null
+          servicio_id: string
+          snapshot: Json | null
+          tasa_asistencia: number
+          total_asistentes: number
+          total_personas: number
+          version: number
+        }
+        Insert: {
+          content_hash?: string | null
+          content_ref?: string | null
+          created_at?: string
+          formato?: string
+          generada_por: string
+          generada_por_email?: string | null
+          id?: string
+          motivo?: string | null
+          parametros?: Json
+          parent_id?: string | null
+          servicio_id: string
+          snapshot?: Json | null
+          tasa_asistencia?: number
+          total_asistentes?: number
+          total_personas?: number
+          version?: number
+        }
+        Update: {
+          content_hash?: string | null
+          content_ref?: string | null
+          created_at?: string
+          formato?: string
+          generada_por?: string
+          generada_por_email?: string | null
+          id?: string
+          motivo?: string | null
+          parametros?: Json
+          parent_id?: string | null
+          servicio_id?: string
+          snapshot?: Json | null
+          tasa_asistencia?: number
+          total_asistentes?: number
+          total_personas?: number
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "planilla_historial_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "planilla_historial"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "planilla_historial_servicio_id_fkey"
+            columns: ["servicio_id"]
+            isOneToOne: false
+            referencedRelation: "servicios"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      procesos_crecimiento: {
+        Row: {
+          created_at: string
+          id: string
+          nombre: string
+          orden: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          nombre: string
+          orden?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          nombre?: string
+          orden?: number
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string
+          grupo_id: string | null
+          id: string
+          persona_id: string | null
+          red: string | null
+          updated_at: string
+          user_id: string
+          zadarma_extension: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string
+          grupo_id?: string | null
+          id?: string
+          persona_id?: string | null
+          red?: string | null
+          updated_at?: string
+          user_id: string
+          zadarma_extension?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string
+          grupo_id?: string | null
+          id?: string
+          persona_id?: string | null
+          red?: string | null
+          updated_at?: string
+          user_id?: string
+          zadarma_extension?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_grupo_id_fkey"
+            columns: ["grupo_id"]
+            isOneToOne: false
+            referencedRelation: "grupos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "profiles_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      prog_asignaciones: {
+        Row: {
+          asistencia: string | null
+          asistencia_at: string | null
+          cargo_id: string | null
+          confirmado_at: string | null
+          created_at: string
+          estado: string
+          evento_id: string
+          id: string
+          ministerio_id: string
+          notas: string | null
+          persona_id: string
+          updated_at: string
+        }
+        Insert: {
+          asistencia?: string | null
+          asistencia_at?: string | null
+          cargo_id?: string | null
+          confirmado_at?: string | null
+          created_at?: string
+          estado?: string
+          evento_id: string
+          id?: string
+          ministerio_id: string
+          notas?: string | null
+          persona_id: string
+          updated_at?: string
+        }
+        Update: {
+          asistencia?: string | null
+          asistencia_at?: string | null
+          cargo_id?: string | null
+          confirmado_at?: string | null
+          created_at?: string
+          estado?: string
+          evento_id?: string
+          id?: string
+          ministerio_id?: string
+          notas?: string | null
+          persona_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "prog_asignaciones_cargo_id_fkey"
+            columns: ["cargo_id"]
+            isOneToOne: false
+            referencedRelation: "prog_cargos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "prog_asignaciones_evento_id_fkey"
+            columns: ["evento_id"]
+            isOneToOne: false
+            referencedRelation: "prog_eventos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "prog_asignaciones_ministerio_id_fkey"
+            columns: ["ministerio_id"]
+            isOneToOne: false
+            referencedRelation: "prog_ministerios"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "prog_asignaciones_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      prog_audit_log: {
+        Row: {
+          action: string
+          actor_nombre: string | null
+          actor_user_id: string | null
+          asignacion_id: string | null
+          created_at: string
+          details: Json | null
+          evento_id: string | null
+          id: string
+        }
+        Insert: {
+          action: string
+          actor_nombre?: string | null
+          actor_user_id?: string | null
+          asignacion_id?: string | null
+          created_at?: string
+          details?: Json | null
+          evento_id?: string | null
+          id?: string
+        }
+        Update: {
+          action?: string
+          actor_nombre?: string | null
+          actor_user_id?: string | null
+          asignacion_id?: string | null
+          created_at?: string
+          details?: Json | null
+          evento_id?: string | null
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "prog_audit_log_evento_id_fkey"
+            columns: ["evento_id"]
+            isOneToOne: false
+            referencedRelation: "prog_eventos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      prog_cargos: {
+        Row: {
+          activo: boolean
+          created_at: string
+          cupo: number
+          id: string
+          ministerio_id: string
+          nombre: string
+          orden: number
+        }
+        Insert: {
+          activo?: boolean
+          created_at?: string
+          cupo?: number
+          id?: string
+          ministerio_id: string
+          nombre: string
+          orden?: number
+        }
+        Update: {
+          activo?: boolean
+          created_at?: string
+          cupo?: number
+          id?: string
+          ministerio_id?: string
+          nombre?: string
+          orden?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "prog_cargos_ministerio_id_fkey"
+            columns: ["ministerio_id"]
+            isOneToOne: false
+            referencedRelation: "prog_ministerios"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      prog_configuracion_tipos: {
+        Row: {
+          created_at: string
+          horas_bloqueo: number
+          id: string
+          recordatorio_24h: boolean
+          recordatorio_2h: boolean
+          tipo_evento: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          horas_bloqueo?: number
+          id?: string
+          recordatorio_24h?: boolean
+          recordatorio_2h?: boolean
+          tipo_evento: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          horas_bloqueo?: number
+          id?: string
+          recordatorio_24h?: boolean
+          recordatorio_2h?: boolean
+          tipo_evento?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      prog_disponibilidad: {
+        Row: {
+          created_at: string
+          fecha_fin: string
+          fecha_inicio: string
+          id: string
+          motivo: string
+          notas: string | null
+          persona_id: string
+        }
+        Insert: {
+          created_at?: string
+          fecha_fin: string
+          fecha_inicio: string
+          id?: string
+          motivo?: string
+          notas?: string | null
+          persona_id: string
+        }
+        Update: {
+          created_at?: string
+          fecha_fin?: string
+          fecha_inicio?: string
+          id?: string
+          motivo?: string
+          notas?: string | null
+          persona_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "prog_disponibilidad_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      prog_evento_textos: {
+        Row: {
+          campo: string
+          created_at: string
+          evento_id: string
+          id: string
+          ministerio_id: string
+          updated_at: string
+          updated_by: string | null
+          valor: string
+        }
+        Insert: {
+          campo: string
+          created_at?: string
+          evento_id: string
+          id?: string
+          ministerio_id: string
+          updated_at?: string
+          updated_by?: string | null
+          valor?: string
+        }
+        Update: {
+          campo?: string
+          created_at?: string
+          evento_id?: string
+          id?: string
+          ministerio_id?: string
+          updated_at?: string
+          updated_by?: string | null
+          valor?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "prog_evento_textos_evento_id_fkey"
+            columns: ["evento_id"]
+            isOneToOne: false
+            referencedRelation: "prog_eventos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "prog_evento_textos_ministerio_id_fkey"
+            columns: ["ministerio_id"]
+            isOneToOne: false
+            referencedRelation: "prog_ministerios"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      prog_eventos: {
+        Row: {
+          asignacion_texto: string | null
+          bloqueo_at: string | null
+          created_at: string
+          created_by: string | null
+          descripcion: string | null
+          estado: string
+          fecha: string
+          hora: string | null
+          id: string
+          lugar: string | null
+          observacion: string | null
+          publicado_at: string | null
+          reminder_24h_sent_at: string | null
+          reminder_2h_sent_at: string | null
+          servicio_id: string | null
+          servidor_texto: string | null
+          tipo: string
+          titulo: string
+          uniforme: string | null
+          updated_at: string
+        }
+        Insert: {
+          asignacion_texto?: string | null
+          bloqueo_at?: string | null
+          created_at?: string
+          created_by?: string | null
+          descripcion?: string | null
+          estado?: string
+          fecha: string
+          hora?: string | null
+          id?: string
+          lugar?: string | null
+          observacion?: string | null
+          publicado_at?: string | null
+          reminder_24h_sent_at?: string | null
+          reminder_2h_sent_at?: string | null
+          servicio_id?: string | null
+          servidor_texto?: string | null
+          tipo?: string
+          titulo: string
+          uniforme?: string | null
+          updated_at?: string
+        }
+        Update: {
+          asignacion_texto?: string | null
+          bloqueo_at?: string | null
+          created_at?: string
+          created_by?: string | null
+          descripcion?: string | null
+          estado?: string
+          fecha?: string
+          hora?: string | null
+          id?: string
+          lugar?: string | null
+          observacion?: string | null
+          publicado_at?: string | null
+          reminder_24h_sent_at?: string | null
+          reminder_2h_sent_at?: string | null
+          servicio_id?: string | null
+          servidor_texto?: string | null
+          tipo?: string
+          titulo?: string
+          uniforme?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "prog_eventos_servicio_id_fkey"
+            columns: ["servicio_id"]
+            isOneToOne: false
+            referencedRelation: "servicios"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      prog_iso_templates: {
+        Row: {
+          codigo: string | null
+          created_at: string
+          estaciones: Json | null
+          estaciones_texto: string[] | null
+          fecha_fin: string | null
+          fecha_inicio: string | null
+          fecha_vigencia: string | null
+          fechas_incluidas: string[] | null
+          firmas: Json | null
+          importante: string | null
+          lider_nombre_manual: string | null
+          ministerio_id: string
+          responsabilidades: string | null
+          tipos_evento: string[] | null
+          titulo: string | null
+          updated_at: string
+          version: string | null
+        }
+        Insert: {
+          codigo?: string | null
+          created_at?: string
+          estaciones?: Json | null
+          estaciones_texto?: string[] | null
+          fecha_fin?: string | null
+          fecha_inicio?: string | null
+          fecha_vigencia?: string | null
+          fechas_incluidas?: string[] | null
+          firmas?: Json | null
+          importante?: string | null
+          lider_nombre_manual?: string | null
+          ministerio_id: string
+          responsabilidades?: string | null
+          tipos_evento?: string[] | null
+          titulo?: string | null
+          updated_at?: string
+          version?: string | null
+        }
+        Update: {
+          codigo?: string | null
+          created_at?: string
+          estaciones?: Json | null
+          estaciones_texto?: string[] | null
+          fecha_fin?: string | null
+          fecha_inicio?: string | null
+          fecha_vigencia?: string | null
+          fechas_incluidas?: string[] | null
+          firmas?: Json | null
+          importante?: string | null
+          lider_nombre_manual?: string | null
+          ministerio_id?: string
+          responsabilidades?: string | null
+          tipos_evento?: string[] | null
+          titulo?: string | null
+          updated_at?: string
+          version?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "prog_iso_templates_ministerio_id_fkey"
+            columns: ["ministerio_id"]
+            isOneToOne: true
+            referencedRelation: "prog_ministerios"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      prog_ministerios: {
+        Row: {
+          activo: boolean
+          color: string | null
+          created_at: string
+          descripcion: string | null
+          icono: string | null
+          id: string
+          lider_persona_id: string | null
+          nombre: string
+          updated_at: string
+        }
+        Insert: {
+          activo?: boolean
+          color?: string | null
+          created_at?: string
+          descripcion?: string | null
+          icono?: string | null
+          id?: string
+          lider_persona_id?: string | null
+          nombre: string
+          updated_at?: string
+        }
+        Update: {
+          activo?: boolean
+          color?: string | null
+          created_at?: string
+          descripcion?: string | null
+          icono?: string | null
+          id?: string
+          lider_persona_id?: string | null
+          nombre?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "prog_ministerios_lider_persona_id_fkey"
+            columns: ["lider_persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      prog_reemplazos: {
+        Row: {
+          aprobado_at: string | null
+          aprobado_por: string | null
+          asignacion_id: string
+          cargo_id: string | null
+          created_at: string
+          estado: string
+          evento_id: string
+          id: string
+          ministerio_id: string | null
+          motivo: string | null
+          notas_aprobacion: string | null
+          persona_reemplazo_id: string | null
+          persona_solicita_id: string
+          updated_at: string
+        }
+        Insert: {
+          aprobado_at?: string | null
+          aprobado_por?: string | null
+          asignacion_id: string
+          cargo_id?: string | null
+          created_at?: string
+          estado?: string
+          evento_id: string
+          id?: string
+          ministerio_id?: string | null
+          motivo?: string | null
+          notas_aprobacion?: string | null
+          persona_reemplazo_id?: string | null
+          persona_solicita_id: string
+          updated_at?: string
+        }
+        Update: {
+          aprobado_at?: string | null
+          aprobado_por?: string | null
+          asignacion_id?: string
+          cargo_id?: string | null
+          created_at?: string
+          estado?: string
+          evento_id?: string
+          id?: string
+          ministerio_id?: string | null
+          motivo?: string | null
+          notas_aprobacion?: string | null
+          persona_reemplazo_id?: string | null
+          persona_solicita_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "prog_reemplazos_asignacion_id_fkey"
+            columns: ["asignacion_id"]
+            isOneToOne: false
+            referencedRelation: "prog_asignaciones"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "prog_reemplazos_evento_id_fkey"
+            columns: ["evento_id"]
+            isOneToOne: false
+            referencedRelation: "prog_eventos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      prog_servidores: {
+        Row: {
+          activo: boolean
+          cargo_id: string | null
+          created_at: string
+          es_lider: boolean
+          id: string
+          ministerio_id: string
+          notas: string | null
+          persona_id: string
+        }
+        Insert: {
+          activo?: boolean
+          cargo_id?: string | null
+          created_at?: string
+          es_lider?: boolean
+          id?: string
+          ministerio_id: string
+          notas?: string | null
+          persona_id: string
+        }
+        Update: {
+          activo?: boolean
+          cargo_id?: string | null
+          created_at?: string
+          es_lider?: boolean
+          id?: string
+          ministerio_id?: string
+          notas?: string | null
+          persona_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "prog_servidores_cargo_id_fkey"
+            columns: ["cargo_id"]
+            isOneToOne: false
+            referencedRelation: "prog_cargos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "prog_servidores_ministerio_id_fkey"
+            columns: ["ministerio_id"]
+            isOneToOne: false
+            referencedRelation: "prog_ministerios"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "prog_servidores_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      progreso_discipulo: {
+        Row: {
+          completed: boolean
+          completed_at: string | null
+          discipulo_id: string
+          etapa_code: string
+          id: string
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          completed?: boolean
+          completed_at?: string | null
+          discipulo_id: string
+          etapa_code: string
+          id?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          completed?: boolean
+          completed_at?: string | null
+          discipulo_id?: string
+          etapa_code?: string
+          id?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "progreso_discipulo_discipulo_id_fkey"
+            columns: ["discipulo_id"]
+            isOneToOne: false
+            referencedRelation: "discipulos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "progreso_discipulo_etapa_code_fkey"
+            columns: ["etapa_code"]
+            isOneToOne: false
+            referencedRelation: "etapas_discipulado"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "progreso_discipulo_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "leaders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      qr_audit_alert_history: {
+        Row: {
+          alert_id: string | null
+          code: string | null
+          created_at: string
+          fail_rate_pct: number
+          fails: number
+          id: string
+          min_events: number
+          rate: number
+          rule_name: string
+          sample_scan_ids: string[] | null
+          servicio_id: string | null
+          total: number
+          triggered_at: string
+          user_id: string
+          window_days: number
+        }
+        Insert: {
+          alert_id?: string | null
+          code?: string | null
+          created_at?: string
+          fail_rate_pct: number
+          fails: number
+          id?: string
+          min_events: number
+          rate: number
+          rule_name: string
+          sample_scan_ids?: string[] | null
+          servicio_id?: string | null
+          total: number
+          triggered_at?: string
+          user_id: string
+          window_days: number
+        }
+        Update: {
+          alert_id?: string | null
+          code?: string | null
+          created_at?: string
+          fail_rate_pct?: number
+          fails?: number
+          id?: string
+          min_events?: number
+          rate?: number
+          rule_name?: string
+          sample_scan_ids?: string[] | null
+          servicio_id?: string | null
+          total?: number
+          triggered_at?: string
+          user_id?: string
+          window_days?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "qr_audit_alert_history_alert_id_fkey"
+            columns: ["alert_id"]
+            isOneToOne: false
+            referencedRelation: "qr_audit_alerts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      qr_audit_alerts: {
+        Row: {
+          code: string | null
+          created_at: string
+          enabled: boolean
+          fail_rate_pct: number
+          id: string
+          min_events: number
+          name: string
+          servicio_id: string | null
+          updated_at: string
+          user_id: string
+          window_days: number
+        }
+        Insert: {
+          code?: string | null
+          created_at?: string
+          enabled?: boolean
+          fail_rate_pct?: number
+          id?: string
+          min_events?: number
+          name: string
+          servicio_id?: string | null
+          updated_at?: string
+          user_id: string
+          window_days?: number
+        }
+        Update: {
+          code?: string | null
+          created_at?: string
+          enabled?: boolean
+          fail_rate_pct?: number
+          id?: string
+          min_events?: number
+          name?: string
+          servicio_id?: string | null
+          updated_at?: string
+          user_id?: string
+          window_days?: number
+        }
+        Relationships: []
+      }
+      qr_audit_presets: {
+        Row: {
+          created_at: string
+          filters: Json
+          id: string
+          name: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          filters?: Json
+          id?: string
+          name: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          filters?: Json
+          id?: string
+          name?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      qr_scan_log: {
+        Row: {
+          code: string | null
+          created_at: string
+          id: string
+          ip: unknown
+          message: string | null
+          persona_id: string | null
+          result: string
+          servicio_id: string | null
+          token: string | null
+          user_agent: string | null
+          user_id: string | null
+        }
+        Insert: {
+          code?: string | null
+          created_at?: string
+          id?: string
+          ip?: unknown
+          message?: string | null
+          persona_id?: string | null
+          result: string
+          servicio_id?: string | null
+          token?: string | null
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          code?: string | null
+          created_at?: string
+          id?: string
+          ip?: unknown
+          message?: string | null
+          persona_id?: string | null
+          result?: string
+          servicio_id?: string | null
+          token?: string | null
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      recursos_academicos: {
+        Row: {
+          archivo_nombre: string | null
+          archivo_url: string | null
+          created_at: string
+          descripcion: string | null
+          id: string
+          maestro_id: string | null
+          materia_id: string
+          tipo: string
+          titulo: string
+          url: string | null
+        }
+        Insert: {
+          archivo_nombre?: string | null
+          archivo_url?: string | null
+          created_at?: string
+          descripcion?: string | null
+          id?: string
+          maestro_id?: string | null
+          materia_id: string
+          tipo?: string
+          titulo: string
+          url?: string | null
+        }
+        Update: {
+          archivo_nombre?: string | null
+          archivo_url?: string | null
+          created_at?: string
+          descripcion?: string | null
+          id?: string
+          maestro_id?: string | null
+          materia_id?: string
+          tipo?: string
+          titulo?: string
+          url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recursos_academicos_maestro_id_fkey"
+            columns: ["maestro_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recursos_academicos_materia_id_fkey"
+            columns: ["materia_id"]
+            isOneToOne: false
+            referencedRelation: "materias"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      relaciones_familiares: {
+        Row: {
+          created_at: string
+          familiar_id: string | null
+          familiar_nombre: string | null
+          id: string
+          parentesco: string
+          persona_id: string
+        }
+        Insert: {
+          created_at?: string
+          familiar_id?: string | null
+          familiar_nombre?: string | null
+          id?: string
+          parentesco: string
+          persona_id: string
+        }
+        Update: {
+          created_at?: string
+          familiar_id?: string | null
+          familiar_nombre?: string | null
+          id?: string
+          parentesco?: string
+          persona_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "relaciones_familiares_familiar_id_fkey"
+            columns: ["familiar_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "relaciones_familiares_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      reporte_asistencia: {
+        Row: {
+          created_at: string
+          es_nuevo: boolean
+          id: string
+          motivo_ausencia: string | null
+          persona_id: string
+          presente: boolean
+          reporte_id: string
+        }
+        Insert: {
+          created_at?: string
+          es_nuevo?: boolean
+          id?: string
+          motivo_ausencia?: string | null
+          persona_id: string
+          presente?: boolean
+          reporte_id: string
+        }
+        Update: {
+          created_at?: string
+          es_nuevo?: boolean
+          id?: string
+          motivo_ausencia?: string | null
+          persona_id?: string
+          presente?: boolean
+          reporte_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reporte_asistencia_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reporte_asistencia_reporte_id_fkey"
+            columns: ["reporte_id"]
+            isOneToOne: false
+            referencedRelation: "reportes_grupos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      reportes_grupos: {
+        Row: {
+          created_at: string
+          estado: string
+          fecha: string
+          fecha_verificacion: string | null
+          grupo_id: string
+          id: string
+          ingreso_verificado_sobre: number | null
+          lider_id: string | null
+          mensaje: string
+          no_realizado: boolean | null
+          observaciones: string | null
+          ofrenda_casa_paz: number | null
+          total_reportado: number | null
+          updated_at: string
+          verificado_por: string | null
+        }
+        Insert: {
+          created_at?: string
+          estado?: string
+          fecha?: string
+          fecha_verificacion?: string | null
+          grupo_id: string
+          id?: string
+          ingreso_verificado_sobre?: number | null
+          lider_id?: string | null
+          mensaje?: string
+          no_realizado?: boolean | null
+          observaciones?: string | null
+          ofrenda_casa_paz?: number | null
+          total_reportado?: number | null
+          updated_at?: string
+          verificado_por?: string | null
+        }
+        Update: {
+          created_at?: string
+          estado?: string
+          fecha?: string
+          fecha_verificacion?: string | null
+          grupo_id?: string
+          id?: string
+          ingreso_verificado_sobre?: number | null
+          lider_id?: string | null
+          mensaje?: string
+          no_realizado?: boolean | null
+          observaciones?: string | null
+          ofrenda_casa_paz?: number | null
+          total_reportado?: number | null
+          updated_at?: string
+          verificado_por?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reportes_grupos_grupo_id_fkey"
+            columns: ["grupo_id"]
+            isOneToOne: false
+            referencedRelation: "grupos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      role_permissions: {
+        Row: {
+          action_key: string
+          allowed: boolean
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          updated_at: string
+        }
+        Insert: {
+          action_key: string
+          allowed?: boolean
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          updated_at?: string
+        }
+        Update: {
+          action_key?: string
+          allowed?: boolean
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      security_audit_log: {
+        Row: {
+          actor_email: string | null
+          actor_user_id: string | null
+          changed: Json
+          created_at: string
+          id: string
+          new_row: Json | null
+          old_row: Json | null
+          operation: string
+          row_id: string | null
+          table_name: string
+        }
+        Insert: {
+          actor_email?: string | null
+          actor_user_id?: string | null
+          changed?: Json
+          created_at?: string
+          id?: string
+          new_row?: Json | null
+          old_row?: Json | null
+          operation: string
+          row_id?: string | null
+          table_name: string
+        }
+        Update: {
+          actor_email?: string | null
+          actor_user_id?: string | null
+          changed?: Json
+          created_at?: string
+          id?: string
+          new_row?: Json | null
+          old_row?: Json | null
+          operation?: string
+          row_id?: string | null
+          table_name?: string
+        }
+        Relationships: []
+      }
+      seguimientos: {
+        Row: {
+          asistencia: string | null
+          created_at: string
+          created_by: string | null
+          discipulo_id: string
+          fecha: string
+          id: string
+          peticiones_oracion: string | null
+          proximos_pasos: string | null
+          resumen: string
+        }
+        Insert: {
+          asistencia?: string | null
+          created_at?: string
+          created_by?: string | null
+          discipulo_id: string
+          fecha?: string
+          id?: string
+          peticiones_oracion?: string | null
+          proximos_pasos?: string | null
+          resumen: string
+        }
+        Update: {
+          asistencia?: string | null
+          created_at?: string
+          created_by?: string | null
+          discipulo_id?: string
+          fecha?: string
+          id?: string
+          peticiones_oracion?: string | null
+          proximos_pasos?: string | null
+          resumen?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "seguimientos_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "leaders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "seguimientos_discipulo_id_fkey"
+            columns: ["discipulo_id"]
+            isOneToOne: false
+            referencedRelation: "discipulos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sem_anuncios: {
+        Row: {
+          autor_user_id: string | null
+          created_at: string
+          id: string
+          mensaje: string
+          oferta_id: string
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          autor_user_id?: string | null
+          created_at?: string
+          id?: string
+          mensaje: string
+          oferta_id: string
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          autor_user_id?: string | null
+          created_at?: string
+          id?: string
+          mensaje?: string
+          oferta_id?: string
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sem_anuncios_oferta_id_fkey"
+            columns: ["oferta_id"]
+            isOneToOne: false
+            referencedRelation: "sem_ofertas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sem_anuncios_lecturas: {
+        Row: {
+          anuncio_id: string
+          id: string
+          leido_at: string
+          persona_id: string
+          user_id: string | null
+        }
+        Insert: {
+          anuncio_id: string
+          id?: string
+          leido_at?: string
+          persona_id: string
+          user_id?: string | null
+        }
+        Update: {
+          anuncio_id?: string
+          id?: string
+          leido_at?: string
+          persona_id?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sem_anuncios_lecturas_anuncio_id_fkey"
+            columns: ["anuncio_id"]
+            isOneToOne: false
+            referencedRelation: "sem_anuncios"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sem_anuncios_lecturas_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sem_asistencias: {
+        Row: {
+          created_at: string
+          estado: string
+          fecha: string
+          id: string
+          inscripcion_materia_id: string
+          observacion: string | null
+        }
+        Insert: {
+          created_at?: string
+          estado?: string
+          fecha: string
+          id?: string
+          inscripcion_materia_id: string
+          observacion?: string | null
+        }
+        Update: {
+          created_at?: string
+          estado?: string
+          fecha?: string
+          id?: string
+          inscripcion_materia_id?: string
+          observacion?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sem_asistencias_inscripcion_materia_id_fkey"
+            columns: ["inscripcion_materia_id"]
+            isOneToOne: false
+            referencedRelation: "sem_inscripcion_materias"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sem_audit_log: {
+        Row: {
+          action: string
+          actor_email: string | null
+          actor_user_id: string | null
+          created_at: string
+          details: Json | null
+          id: string
+          inscripcion_id: string | null
+          materia_id: string | null
+          oferta_id: string | null
+          persona_id: string | null
+        }
+        Insert: {
+          action: string
+          actor_email?: string | null
+          actor_user_id?: string | null
+          created_at?: string
+          details?: Json | null
+          id?: string
+          inscripcion_id?: string | null
+          materia_id?: string | null
+          oferta_id?: string | null
+          persona_id?: string | null
+        }
+        Update: {
+          action?: string
+          actor_email?: string | null
+          actor_user_id?: string | null
+          created_at?: string
+          details?: Json | null
+          id?: string
+          inscripcion_id?: string | null
+          materia_id?: string | null
+          oferta_id?: string | null
+          persona_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sem_audit_log_inscripcion_id_fkey"
+            columns: ["inscripcion_id"]
+            isOneToOne: false
+            referencedRelation: "sem_inscripciones"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sem_audit_log_materia_id_fkey"
+            columns: ["materia_id"]
+            isOneToOne: false
+            referencedRelation: "sem_materias"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sem_audit_log_oferta_id_fkey"
+            columns: ["oferta_id"]
+            isOneToOne: false
+            referencedRelation: "sem_ofertas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sem_audit_log_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sem_calificaciones: {
+        Row: {
+          created_at: string
+          evaluacion_id: string
+          id: string
+          inscripcion_materia_id: string
+          nota: number
+          observacion: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          evaluacion_id: string
+          id?: string
+          inscripcion_materia_id: string
+          nota: number
+          observacion?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          evaluacion_id?: string
+          id?: string
+          inscripcion_materia_id?: string
+          nota?: number
+          observacion?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sem_calificaciones_evaluacion_id_fkey"
+            columns: ["evaluacion_id"]
+            isOneToOne: false
+            referencedRelation: "sem_evaluaciones"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sem_calificaciones_inscripcion_materia_id_fkey"
+            columns: ["inscripcion_materia_id"]
+            isOneToOne: false
+            referencedRelation: "sem_inscripcion_materias"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sem_entregas: {
+        Row: {
+          archivo_nombre: string | null
+          archivo_path: string | null
+          archivo_tamano: number | null
+          archivo_tipo: string | null
+          archivo_url: string | null
+          calificado_por: string | null
+          comentario: string | null
+          created_at: string
+          estado: string
+          evaluacion_id: string
+          id: string
+          inscripcion_materia_id: string
+          persona_id: string
+          retroalimentacion: string | null
+          updated_at: string
+          user_id: string | null
+          version: number
+        }
+        Insert: {
+          archivo_nombre?: string | null
+          archivo_path?: string | null
+          archivo_tamano?: number | null
+          archivo_tipo?: string | null
+          archivo_url?: string | null
+          calificado_por?: string | null
+          comentario?: string | null
+          created_at?: string
+          estado?: string
+          evaluacion_id: string
+          id?: string
+          inscripcion_materia_id: string
+          persona_id: string
+          retroalimentacion?: string | null
+          updated_at?: string
+          user_id?: string | null
+          version?: number
+        }
+        Update: {
+          archivo_nombre?: string | null
+          archivo_path?: string | null
+          archivo_tamano?: number | null
+          archivo_tipo?: string | null
+          archivo_url?: string | null
+          calificado_por?: string | null
+          comentario?: string | null
+          created_at?: string
+          estado?: string
+          evaluacion_id?: string
+          id?: string
+          inscripcion_materia_id?: string
+          persona_id?: string
+          retroalimentacion?: string | null
+          updated_at?: string
+          user_id?: string | null
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sem_entregas_evaluacion_id_fkey"
+            columns: ["evaluacion_id"]
+            isOneToOne: false
+            referencedRelation: "sem_evaluaciones"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sem_entregas_inscripcion_materia_id_fkey"
+            columns: ["inscripcion_materia_id"]
+            isOneToOne: false
+            referencedRelation: "sem_inscripcion_materias"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sem_entregas_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sem_evaluaciones: {
+        Row: {
+          created_at: string
+          descripcion: string | null
+          fecha: string | null
+          id: string
+          nombre: string
+          oferta_id: string
+          peso: number
+          publicada: boolean
+          tipo: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          descripcion?: string | null
+          fecha?: string | null
+          id?: string
+          nombre: string
+          oferta_id: string
+          peso?: number
+          publicada?: boolean
+          tipo?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          descripcion?: string | null
+          fecha?: string | null
+          id?: string
+          nombre?: string
+          oferta_id?: string
+          peso?: number
+          publicada?: boolean
+          tipo?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sem_evaluaciones_oferta_id_fkey"
+            columns: ["oferta_id"]
+            isOneToOne: false
+            referencedRelation: "sem_ofertas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sem_foro_mensajes: {
+        Row: {
+          autor_avatar: string | null
+          autor_nombre: string | null
+          autor_user_id: string | null
+          created_at: string
+          foro_id: string
+          id: string
+          mensaje: string
+          parent_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          autor_avatar?: string | null
+          autor_nombre?: string | null
+          autor_user_id?: string | null
+          created_at?: string
+          foro_id: string
+          id?: string
+          mensaje: string
+          parent_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          autor_avatar?: string | null
+          autor_nombre?: string | null
+          autor_user_id?: string | null
+          created_at?: string
+          foro_id?: string
+          id?: string
+          mensaje?: string
+          parent_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sem_foro_mensajes_foro_id_fkey"
+            columns: ["foro_id"]
+            isOneToOne: false
+            referencedRelation: "sem_foros"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sem_foro_mensajes_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "sem_foro_mensajes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sem_foros: {
+        Row: {
+          autor_nombre: string | null
+          autor_user_id: string | null
+          cerrado: boolean
+          created_at: string
+          descripcion: string | null
+          fijado: boolean
+          id: string
+          oferta_id: string
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          autor_nombre?: string | null
+          autor_user_id?: string | null
+          cerrado?: boolean
+          created_at?: string
+          descripcion?: string | null
+          fijado?: boolean
+          id?: string
+          oferta_id: string
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          autor_nombre?: string | null
+          autor_user_id?: string | null
+          cerrado?: boolean
+          created_at?: string
+          descripcion?: string | null
+          fijado?: boolean
+          id?: string
+          oferta_id?: string
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sem_foros_oferta_id_fkey"
+            columns: ["oferta_id"]
+            isOneToOne: false
+            referencedRelation: "sem_ofertas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sem_inscripcion_materias: {
+        Row: {
+          created_at: string
+          estado: string
+          id: string
+          inscripcion_id: string
+          materia_id: string
+          nota_final: number | null
+          oferta_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          estado?: string
+          id?: string
+          inscripcion_id: string
+          materia_id: string
+          nota_final?: number | null
+          oferta_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          estado?: string
+          id?: string
+          inscripcion_id?: string
+          materia_id?: string
+          nota_final?: number | null
+          oferta_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sem_inscripcion_materias_inscripcion_id_fkey"
+            columns: ["inscripcion_id"]
+            isOneToOne: false
+            referencedRelation: "sem_inscripciones"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sem_inscripcion_materias_materia_id_fkey"
+            columns: ["materia_id"]
+            isOneToOne: false
+            referencedRelation: "sem_materias"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sem_inscripcion_materias_oferta_id_fkey"
+            columns: ["oferta_id"]
+            isOneToOne: false
+            referencedRelation: "sem_ofertas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sem_inscripciones: {
+        Row: {
+          anio_ingreso: number | null
+          created_at: string
+          estado: string
+          id: string
+          observaciones: string | null
+          periodo_id: string
+          periodo_ingreso_id: string | null
+          persona_id: string
+          programa_id: string
+          promedio_acumulado: number | null
+          semestre_actual: number | null
+          total_creditos_aprobados: number | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          anio_ingreso?: number | null
+          created_at?: string
+          estado?: string
+          id?: string
+          observaciones?: string | null
+          periodo_id: string
+          periodo_ingreso_id?: string | null
+          persona_id: string
+          programa_id: string
+          promedio_acumulado?: number | null
+          semestre_actual?: number | null
+          total_creditos_aprobados?: number | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          anio_ingreso?: number | null
+          created_at?: string
+          estado?: string
+          id?: string
+          observaciones?: string | null
+          periodo_id?: string
+          periodo_ingreso_id?: string | null
+          persona_id?: string
+          programa_id?: string
+          promedio_acumulado?: number | null
+          semestre_actual?: number | null
+          total_creditos_aprobados?: number | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sem_inscripciones_periodo_id_fkey"
+            columns: ["periodo_id"]
+            isOneToOne: false
+            referencedRelation: "sem_periodos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sem_inscripciones_periodo_ingreso_id_fkey"
+            columns: ["periodo_ingreso_id"]
+            isOneToOne: false
+            referencedRelation: "sem_periodos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sem_inscripciones_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sem_inscripciones_programa_id_fkey"
+            columns: ["programa_id"]
+            isOneToOne: false
+            referencedRelation: "sem_programas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sem_materia_prerequisitos: {
+        Row: {
+          created_at: string
+          id: string
+          materia_id: string
+          prerequisito_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          materia_id: string
+          prerequisito_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          materia_id?: string
+          prerequisito_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sem_materia_prerequisitos_materia_id_fkey"
+            columns: ["materia_id"]
+            isOneToOne: false
+            referencedRelation: "sem_materias"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sem_materia_prerequisitos_prerequisito_id_fkey"
+            columns: ["prerequisito_id"]
+            isOneToOne: false
+            referencedRelation: "sem_materias"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sem_materias: {
+        Row: {
+          activo: boolean
+          area: string | null
+          codigo: string
+          color: string | null
+          created_at: string
+          creditos: number
+          descripcion: string | null
+          id: string
+          intensidad_horaria: number | null
+          nombre: string
+          programa_id: string
+          updated_at: string
+          zoom_link: string | null
+        }
+        Insert: {
+          activo?: boolean
+          area?: string | null
+          codigo: string
+          color?: string | null
+          created_at?: string
+          creditos?: number
+          descripcion?: string | null
+          id?: string
+          intensidad_horaria?: number | null
+          nombre: string
+          programa_id: string
+          updated_at?: string
+          zoom_link?: string | null
+        }
+        Update: {
+          activo?: boolean
+          area?: string | null
+          codigo?: string
+          color?: string | null
+          created_at?: string
+          creditos?: number
+          descripcion?: string | null
+          id?: string
+          intensidad_horaria?: number | null
+          nombre?: string
+          programa_id?: string
+          updated_at?: string
+          zoom_link?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sem_materias_programa_id_fkey"
+            columns: ["programa_id"]
+            isOneToOne: false
+            referencedRelation: "sem_programas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sem_materias_historial: {
+        Row: {
+          campo: string
+          created_at: string
+          id: string
+          materia_id: string
+          usuario_id: string | null
+          usuario_nombre: string | null
+          valor_anterior: string | null
+          valor_nuevo: string | null
+        }
+        Insert: {
+          campo: string
+          created_at?: string
+          id?: string
+          materia_id: string
+          usuario_id?: string | null
+          usuario_nombre?: string | null
+          valor_anterior?: string | null
+          valor_nuevo?: string | null
+        }
+        Update: {
+          campo?: string
+          created_at?: string
+          id?: string
+          materia_id?: string
+          usuario_id?: string | null
+          usuario_nombre?: string | null
+          valor_anterior?: string | null
+          valor_nuevo?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sem_materias_historial_materia_id_fkey"
+            columns: ["materia_id"]
+            isOneToOne: false
+            referencedRelation: "sem_materias"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sem_ofertas: {
+        Row: {
+          aula: string | null
+          created_at: string
+          cupos: number | null
+          docente_nombre: string | null
+          docente_persona_id: string | null
+          estado: string
+          horario: string | null
+          id: string
+          materia_id: string
+          modalidad: string | null
+          periodo_id: string
+          updated_at: string
+          zoom_link: string | null
+          zoom_meeting_id: string | null
+          zoom_password: string | null
+        }
+        Insert: {
+          aula?: string | null
+          created_at?: string
+          cupos?: number | null
+          docente_nombre?: string | null
+          docente_persona_id?: string | null
+          estado?: string
+          horario?: string | null
+          id?: string
+          materia_id: string
+          modalidad?: string | null
+          periodo_id: string
+          updated_at?: string
+          zoom_link?: string | null
+          zoom_meeting_id?: string | null
+          zoom_password?: string | null
+        }
+        Update: {
+          aula?: string | null
+          created_at?: string
+          cupos?: number | null
+          docente_nombre?: string | null
+          docente_persona_id?: string | null
+          estado?: string
+          horario?: string | null
+          id?: string
+          materia_id?: string
+          modalidad?: string | null
+          periodo_id?: string
+          updated_at?: string
+          zoom_link?: string | null
+          zoom_meeting_id?: string | null
+          zoom_password?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sem_ofertas_docente_persona_id_fkey"
+            columns: ["docente_persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sem_ofertas_materia_id_fkey"
+            columns: ["materia_id"]
+            isOneToOne: false
+            referencedRelation: "sem_materias"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sem_ofertas_periodo_id_fkey"
+            columns: ["periodo_id"]
+            isOneToOne: false
+            referencedRelation: "sem_periodos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sem_pagos_inscripcion: {
+        Row: {
+          comprobante_url: string | null
+          concepto: string
+          created_at: string
+          estado: string
+          fecha_pago: string | null
+          fecha_vencimiento: string | null
+          id: string
+          inscripcion_id: string
+          metodo_pago: string | null
+          updated_at: string
+          valor: number
+          valor_pagado: number | null
+        }
+        Insert: {
+          comprobante_url?: string | null
+          concepto: string
+          created_at?: string
+          estado?: string
+          fecha_pago?: string | null
+          fecha_vencimiento?: string | null
+          id?: string
+          inscripcion_id: string
+          metodo_pago?: string | null
+          updated_at?: string
+          valor: number
+          valor_pagado?: number | null
+        }
+        Update: {
+          comprobante_url?: string | null
+          concepto?: string
+          created_at?: string
+          estado?: string
+          fecha_pago?: string | null
+          fecha_vencimiento?: string | null
+          id?: string
+          inscripcion_id?: string
+          metodo_pago?: string | null
+          updated_at?: string
+          valor?: number
+          valor_pagado?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sem_pagos_inscripcion_inscripcion_id_fkey"
+            columns: ["inscripcion_id"]
+            isOneToOne: false
+            referencedRelation: "sem_inscripciones"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sem_pensum_materias: {
+        Row: {
+          created_at: string
+          id: string
+          materia_id: string
+          obligatoria: boolean
+          orden: number | null
+          semestre_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          materia_id: string
+          obligatoria?: boolean
+          orden?: number | null
+          semestre_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          materia_id?: string
+          obligatoria?: boolean
+          orden?: number | null
+          semestre_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sem_pensum_materias_materia_id_fkey"
+            columns: ["materia_id"]
+            isOneToOne: false
+            referencedRelation: "sem_materias"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sem_pensum_materias_semestre_id_fkey"
+            columns: ["semestre_id"]
+            isOneToOne: false
+            referencedRelation: "sem_pensum_semestres"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sem_pensum_semestres: {
+        Row: {
+          created_at: string
+          creditos_totales: number | null
+          id: string
+          nombre: string
+          numero: number
+          programa_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          creditos_totales?: number | null
+          id?: string
+          nombre: string
+          numero: number
+          programa_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          creditos_totales?: number | null
+          id?: string
+          nombre?: string
+          numero?: number
+          programa_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sem_pensum_semestres_programa_id_fkey"
+            columns: ["programa_id"]
+            isOneToOne: false
+            referencedRelation: "sem_programas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sem_periodos: {
+        Row: {
+          activo: boolean
+          codigo: string
+          created_at: string
+          fecha_fin: string
+          fecha_fin_inscripcion: string | null
+          fecha_inicio: string
+          fecha_inicio_inscripcion: string | null
+          id: string
+          nombre: string
+          programa_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          activo?: boolean
+          codigo: string
+          created_at?: string
+          fecha_fin: string
+          fecha_fin_inscripcion?: string | null
+          fecha_inicio: string
+          fecha_inicio_inscripcion?: string | null
+          id?: string
+          nombre: string
+          programa_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          activo?: boolean
+          codigo?: string
+          created_at?: string
+          fecha_fin?: string
+          fecha_fin_inscripcion?: string | null
+          fecha_inicio?: string
+          fecha_inicio_inscripcion?: string | null
+          id?: string
+          nombre?: string
+          programa_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sem_periodos_programa_id_fkey"
+            columns: ["programa_id"]
+            isOneToOne: false
+            referencedRelation: "sem_programas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sem_programas: {
+        Row: {
+          activo: boolean
+          codigo: string
+          created_at: string
+          descripcion: string | null
+          duracion_anios: number | null
+          id: string
+          modalidad: string | null
+          nombre: string
+          total_creditos: number | null
+          total_semestres: number
+          updated_at: string
+        }
+        Insert: {
+          activo?: boolean
+          codigo: string
+          created_at?: string
+          descripcion?: string | null
+          duracion_anios?: number | null
+          id?: string
+          modalidad?: string | null
+          nombre: string
+          total_creditos?: number | null
+          total_semestres?: number
+          updated_at?: string
+        }
+        Update: {
+          activo?: boolean
+          codigo?: string
+          created_at?: string
+          descripcion?: string | null
+          duracion_anios?: number | null
+          id?: string
+          modalidad?: string | null
+          nombre?: string
+          total_creditos?: number | null
+          total_semestres?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      sem_recursos: {
+        Row: {
+          autor: string | null
+          created_at: string
+          descripcion: string | null
+          id: string
+          materia_id: string | null
+          periodo_id: string | null
+          programa_id: string | null
+          publicado: boolean
+          storage_path: string | null
+          tipo: string
+          titulo: string
+          updated_at: string
+          url: string | null
+        }
+        Insert: {
+          autor?: string | null
+          created_at?: string
+          descripcion?: string | null
+          id?: string
+          materia_id?: string | null
+          periodo_id?: string | null
+          programa_id?: string | null
+          publicado?: boolean
+          storage_path?: string | null
+          tipo?: string
+          titulo: string
+          updated_at?: string
+          url?: string | null
+        }
+        Update: {
+          autor?: string | null
+          created_at?: string
+          descripcion?: string | null
+          id?: string
+          materia_id?: string | null
+          periodo_id?: string | null
+          programa_id?: string | null
+          publicado?: boolean
+          storage_path?: string | null
+          tipo?: string
+          titulo?: string
+          updated_at?: string
+          url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sem_recursos_materia_id_fkey"
+            columns: ["materia_id"]
+            isOneToOne: false
+            referencedRelation: "sem_materias"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sem_recursos_periodo_id_fkey"
+            columns: ["periodo_id"]
+            isOneToOne: false
+            referencedRelation: "sem_periodos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sem_recursos_programa_id_fkey"
+            columns: ["programa_id"]
+            isOneToOne: false
+            referencedRelation: "sem_programas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sem_zoom_config: {
+        Row: {
+          account_id_masked: string | null
+          created_at: string
+          default_duration_minutes: number
+          host_email: string | null
+          id: string
+          last_validation_at: string | null
+          last_validation_message: string | null
+          last_validation_status: string | null
+          mode: string
+          singleton: boolean
+          updated_at: string
+          validated_by: string | null
+        }
+        Insert: {
+          account_id_masked?: string | null
+          created_at?: string
+          default_duration_minutes?: number
+          host_email?: string | null
+          id?: string
+          last_validation_at?: string | null
+          last_validation_message?: string | null
+          last_validation_status?: string | null
+          mode?: string
+          singleton?: boolean
+          updated_at?: string
+          validated_by?: string | null
+        }
+        Update: {
+          account_id_masked?: string | null
+          created_at?: string
+          default_duration_minutes?: number
+          host_email?: string | null
+          id?: string
+          last_validation_at?: string | null
+          last_validation_message?: string | null
+          last_validation_status?: string | null
+          mode?: string
+          singleton?: boolean
+          updated_at?: string
+          validated_by?: string | null
+        }
+        Relationships: []
+      }
+      sem_zoom_sesiones: {
+        Row: {
+          created_at: string
+          duration_minutes: number | null
+          grabacion_url: string | null
+          id: string
+          join_url: string | null
+          meeting_id: string | null
+          oferta_id: string
+          password: string | null
+          raw: Json | null
+          realizada: boolean
+          start_time: string | null
+          start_url: string | null
+          topic: string | null
+        }
+        Insert: {
+          created_at?: string
+          duration_minutes?: number | null
+          grabacion_url?: string | null
+          id?: string
+          join_url?: string | null
+          meeting_id?: string | null
+          oferta_id: string
+          password?: string | null
+          raw?: Json | null
+          realizada?: boolean
+          start_time?: string | null
+          start_url?: string | null
+          topic?: string | null
+        }
+        Update: {
+          created_at?: string
+          duration_minutes?: number | null
+          grabacion_url?: string | null
+          id?: string
+          join_url?: string | null
+          meeting_id?: string | null
+          oferta_id?: string
+          password?: string | null
+          raw?: Json | null
+          realizada?: boolean
+          start_time?: string | null
+          start_url?: string | null
+          topic?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sem_zoom_sesiones_oferta_id_fkey"
+            columns: ["oferta_id"]
+            isOneToOne: false
+            referencedRelation: "sem_ofertas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      servicio_ministerios: {
+        Row: {
+          created_at: string
+          id: string
+          ministerio_id: string
+          servicio_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          ministerio_id: string
+          servicio_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          ministerio_id?: string
+          servicio_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "servicio_ministerios_ministerio_id_fkey"
+            columns: ["ministerio_id"]
+            isOneToOne: false
+            referencedRelation: "prog_ministerios"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "servicio_ministerios_servicio_id_fkey"
+            columns: ["servicio_id"]
+            isOneToOne: false
+            referencedRelation: "servicios"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      servicio_programacion: {
+        Row: {
+          cargo_id: string | null
+          created_at: string
+          id: string
+          ministerio_id: string
+          notas: string | null
+          persona_id: string
+          servicio_id: string
+          updated_at: string
+        }
+        Insert: {
+          cargo_id?: string | null
+          created_at?: string
+          id?: string
+          ministerio_id: string
+          notas?: string | null
+          persona_id: string
+          servicio_id: string
+          updated_at?: string
+        }
+        Update: {
+          cargo_id?: string | null
+          created_at?: string
+          id?: string
+          ministerio_id?: string
+          notas?: string | null
+          persona_id?: string
+          servicio_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "servicio_programacion_cargo_id_fkey"
+            columns: ["cargo_id"]
+            isOneToOne: false
+            referencedRelation: "prog_cargos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "servicio_programacion_ministerio_id_fkey"
+            columns: ["ministerio_id"]
+            isOneToOne: false
+            referencedRelation: "prog_ministerios"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "servicio_programacion_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "servicio_programacion_servicio_id_fkey"
+            columns: ["servicio_id"]
+            isOneToOne: false
+            referencedRelation: "servicios"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      servicios: {
+        Row: {
+          aforo: number | null
+          created_at: string
+          descripcion: string | null
+          dia_reunion: string | null
+          estado: string
+          fecha: string
+          habilitado_reserva: boolean | null
+          hora: string | null
+          id: string
+          lugar: string | null
+          nombre: string
+          predicador: string | null
+          qr_activated_at: string | null
+          qr_activo: boolean
+          qr_expires_at: string | null
+          qr_token: string | null
+          sede: string | null
+          tipo: Database["public"]["Enums"]["tipo_servicio"]
+          updated_at: string
+        }
+        Insert: {
+          aforo?: number | null
+          created_at?: string
+          descripcion?: string | null
+          dia_reunion?: string | null
+          estado?: string
+          fecha: string
+          habilitado_reserva?: boolean | null
+          hora?: string | null
+          id?: string
+          lugar?: string | null
+          nombre: string
+          predicador?: string | null
+          qr_activated_at?: string | null
+          qr_activo?: boolean
+          qr_expires_at?: string | null
+          qr_token?: string | null
+          sede?: string | null
+          tipo: Database["public"]["Enums"]["tipo_servicio"]
+          updated_at?: string
+        }
+        Update: {
+          aforo?: number | null
+          created_at?: string
+          descripcion?: string | null
+          dia_reunion?: string | null
+          estado?: string
+          fecha?: string
+          habilitado_reserva?: boolean | null
+          hora?: string | null
+          id?: string
+          lugar?: string | null
+          nombre?: string
+          predicador?: string | null
+          qr_activated_at?: string | null
+          qr_activo?: boolean
+          qr_expires_at?: string | null
+          qr_token?: string | null
+          sede?: string | null
+          tipo?: Database["public"]["Enums"]["tipo_servicio"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      suppressed_emails: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          metadata: Json | null
+          reason: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          metadata?: Json | null
+          reason: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          metadata?: Json | null
+          reason?: string
+        }
+        Relationships: []
+      }
+      tema_semana_versiones: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          created_by_email: string | null
+          descripcion: string | null
+          estado: string
+          fecha_fin: string | null
+          fecha_inicio: string | null
+          id: string
+          parent_version_id: string | null
+          pdf_url: string | null
+          titulo: string | null
+          updated_at: string
+          url: string | null
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          created_by_email?: string | null
+          descripcion?: string | null
+          estado?: string
+          fecha_fin?: string | null
+          fecha_inicio?: string | null
+          id?: string
+          parent_version_id?: string | null
+          pdf_url?: string | null
+          titulo?: string | null
+          updated_at?: string
+          url?: string | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          created_by_email?: string | null
+          descripcion?: string | null
+          estado?: string
+          fecha_fin?: string | null
+          fecha_inicio?: string | null
+          id?: string
+          parent_version_id?: string | null
+          pdf_url?: string | null
+          titulo?: string | null
+          updated_at?: string
+          url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tema_semana_versiones_parent_version_id_fkey"
+            columns: ["parent_version_id"]
+            isOneToOne: false
+            referencedRelation: "tema_semana_versiones"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tesoreria_consignacion_historial: {
+        Row: {
+          cambiado_por: string | null
+          consignacion_semanal_id: string | null
+          created_at: string
+          fecha_consignacion: string | null
+          id: string
+          motivo_cambio: string | null
+          registro_id: string | null
+          soporte_url: string | null
+          valor_consignado: number | null
+        }
+        Insert: {
+          cambiado_por?: string | null
+          consignacion_semanal_id?: string | null
+          created_at?: string
+          fecha_consignacion?: string | null
+          id?: string
+          motivo_cambio?: string | null
+          registro_id?: string | null
+          soporte_url?: string | null
+          valor_consignado?: number | null
+        }
+        Update: {
+          cambiado_por?: string | null
+          consignacion_semanal_id?: string | null
+          created_at?: string
+          fecha_consignacion?: string | null
+          id?: string
+          motivo_cambio?: string | null
+          registro_id?: string | null
+          soporte_url?: string | null
+          valor_consignado?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tesoreria_consignacion_historial_consignacion_semanal_id_fkey"
+            columns: ["consignacion_semanal_id"]
+            isOneToOne: false
+            referencedRelation: "tesoreria_consignacion_semanal"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tesoreria_consignacion_historial_registro_id_fkey"
+            columns: ["registro_id"]
+            isOneToOne: false
+            referencedRelation: "tesoreria_ofrendas_cdp"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tesoreria_consignacion_semanal: {
+        Row: {
+          consignacion_completada: boolean
+          created_at: string
+          fecha_consignacion: string | null
+          id: string
+          observacion: string | null
+          registrado_por: string | null
+          semana_fin: string
+          semana_inicio: string
+          soporte_consignacion_url: string | null
+          updated_at: string
+          valor_consignado: number
+          valor_total_entregado: number
+        }
+        Insert: {
+          consignacion_completada?: boolean
+          created_at?: string
+          fecha_consignacion?: string | null
+          id?: string
+          observacion?: string | null
+          registrado_por?: string | null
+          semana_fin: string
+          semana_inicio: string
+          soporte_consignacion_url?: string | null
+          updated_at?: string
+          valor_consignado?: number
+          valor_total_entregado?: number
+        }
+        Update: {
+          consignacion_completada?: boolean
+          created_at?: string
+          fecha_consignacion?: string | null
+          id?: string
+          observacion?: string | null
+          registrado_por?: string | null
+          semana_fin?: string
+          semana_inicio?: string
+          soporte_consignacion_url?: string | null
+          updated_at?: string
+          valor_consignado?: number
+          valor_total_entregado?: number
+        }
+        Relationships: []
+      }
+      tesoreria_ofrendas_cdp: {
+        Row: {
+          consignacion_completada: boolean
+          created_at: string
+          fecha_consignacion: string | null
+          fecha_entrega: string | null
+          grupo_id: string
+          id: string
+          observacion: string | null
+          registrado_por: string | null
+          semana_fin: string
+          semana_inicio: string
+          soporte_consignacion_url: string | null
+          updated_at: string
+          valor_consignado: number
+          valor_entregado: number
+          valor_reportado_override: number | null
+        }
+        Insert: {
+          consignacion_completada?: boolean
+          created_at?: string
+          fecha_consignacion?: string | null
+          fecha_entrega?: string | null
+          grupo_id: string
+          id?: string
+          observacion?: string | null
+          registrado_por?: string | null
+          semana_fin: string
+          semana_inicio: string
+          soporte_consignacion_url?: string | null
+          updated_at?: string
+          valor_consignado?: number
+          valor_entregado?: number
+          valor_reportado_override?: number | null
+        }
+        Update: {
+          consignacion_completada?: boolean
+          created_at?: string
+          fecha_consignacion?: string | null
+          fecha_entrega?: string | null
+          grupo_id?: string
+          id?: string
+          observacion?: string | null
+          registrado_por?: string | null
+          semana_fin?: string
+          semana_inicio?: string
+          soporte_consignacion_url?: string | null
+          updated_at?: string
+          valor_consignado?: number
+          valor_entregado?: number
+          valor_reportado_override?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tesoreria_ofrendas_cdp_grupo_id_fkey"
+            columns: ["grupo_id"]
+            isOneToOne: false
+            referencedRelation: "grupos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      videos_iglesia: {
+        Row: {
+          created_at: string
+          estado: string
+          id: string
+          orden: number
+          titulo: string
+          youtube_url: string
+        }
+        Insert: {
+          created_at?: string
+          estado?: string
+          id?: string
+          orden?: number
+          titulo: string
+          youtube_url: string
+        }
+        Update: {
+          created_at?: string
+          estado?: string
+          id?: string
+          orden?: number
+          titulo?: string
+          youtube_url?: string
+        }
+        Relationships: []
+      }
+      zadarma_pool: {
+        Row: {
+          assigned_user_id: string | null
+          extension: string
+          last_heartbeat: string | null
+        }
+        Insert: {
+          assigned_user_id?: string | null
+          extension: string
+          last_heartbeat?: string | null
+        }
+        Update: {
+          assigned_user_id?: string | null
+          extension?: string
+          last_heartbeat?: string | null
+        }
+        Relationships: []
+      }
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      allocate_zadarma_extension: {
+        Args: { p_user_id: string }
+        Returns: string
+      }
+      bytea_to_text: { Args: { data: string }; Returns: string }
+      call_zadarma: { Args: { p_to: string }; Returns: Json }
+      can_create_personas: { Args: { _uid: string }; Returns: boolean }
+      cdp_generate_deadline_alerts: { Args: never; Returns: number }
+      checkin_qr: {
+        Args: { _servicio_id: string; _token: string }
+        Returns: Json
+      }
+      create_persona_with_permission: {
+        Args: { _payload: Json }
+        Returns: {
+          apellidos: string
+          created_at: string
+          direccion: string | null
+          documento: string | null
+          email: string | null
+          estado_civil: string | null
+          estado_iglesia: Database["public"]["Enums"]["estado_iglesia"]
+          fecha_bautismo: string | null
+          fecha_conversion: string | null
+          fecha_ingreso: string | null
+          fecha_nacimiento: string | null
+          foto_url: string | null
+          grupo_id: string | null
+          id: string
+          invitado_por: string | null
+          lider_responsable: string | null
+          ministerio: string | null
+          nacionalidad: string | null
+          nombres: string
+          observaciones: string | null
+          ocupacion: string | null
+          qr_code: string | null
+          seguimiento_por: string | null
+          sexo: string | null
+          telefono: string | null
+          tipo_documento: string | null
+          tipo_persona: Database["public"]["Enums"]["tipo_persona"]
+          tipos_persona: string[] | null
+          updated_at: string
+          vinculacion: string | null
+          whatsapp: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "personas"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      delete_email: {
+        Args: { message_id: number; queue_name: string }
+        Returns: boolean
+      }
+      email_queue_dispatch: { Args: never; Returns: undefined }
+      enqueue_email: {
+        Args: { payload: Json; queue_name: string }
+        Returns: number
+      }
+      get_users_for_export: {
+        Args: never
+        Returns: {
+          display_name: string
+          email: string
+          user_id: string
+        }[]
+      }
+      get_zadarma_webrtc_key: { Args: { p_sip: string }; Returns: string }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      http: {
+        Args: { request: Database["public"]["CompositeTypes"]["http_request"] }
+        Returns: Database["public"]["CompositeTypes"]["http_response"]
+        SetofOptions: {
+          from: "http_request"
+          to: "http_response"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      http_delete:
+        | {
+            Args: { uri: string }
+            Returns: Database["public"]["CompositeTypes"]["http_response"]
+            SetofOptions: {
+              from: "*"
+              to: "http_response"
+              isOneToOne: true
+              isSetofReturn: false
+            }
+          }
+        | {
+            Args: { content: string; content_type: string; uri: string }
+            Returns: Database["public"]["CompositeTypes"]["http_response"]
+            SetofOptions: {
+              from: "*"
+              to: "http_response"
+              isOneToOne: true
+              isSetofReturn: false
+            }
+          }
+      http_get:
+        | {
+            Args: { uri: string }
+            Returns: Database["public"]["CompositeTypes"]["http_response"]
+            SetofOptions: {
+              from: "*"
+              to: "http_response"
+              isOneToOne: true
+              isSetofReturn: false
+            }
+          }
+        | {
+            Args: { data: Json; uri: string }
+            Returns: Database["public"]["CompositeTypes"]["http_response"]
+            SetofOptions: {
+              from: "*"
+              to: "http_response"
+              isOneToOne: true
+              isSetofReturn: false
+            }
+          }
+      http_head: {
+        Args: { uri: string }
+        Returns: Database["public"]["CompositeTypes"]["http_response"]
+        SetofOptions: {
+          from: "*"
+          to: "http_response"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      http_header: {
+        Args: { field: string; value: string }
+        Returns: Database["public"]["CompositeTypes"]["http_header"]
+        SetofOptions: {
+          from: "*"
+          to: "http_header"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      http_list_curlopt: {
+        Args: never
+        Returns: {
+          curlopt: string
+          value: string
+        }[]
+      }
+      http_patch: {
+        Args: { content: string; content_type: string; uri: string }
+        Returns: Database["public"]["CompositeTypes"]["http_response"]
+        SetofOptions: {
+          from: "*"
+          to: "http_response"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      http_post:
+        | {
+            Args: { content: string; content_type: string; uri: string }
+            Returns: Database["public"]["CompositeTypes"]["http_response"]
+            SetofOptions: {
+              from: "*"
+              to: "http_response"
+              isOneToOne: true
+              isSetofReturn: false
+            }
+          }
+        | {
+            Args: { data: Json; uri: string }
+            Returns: Database["public"]["CompositeTypes"]["http_response"]
+            SetofOptions: {
+              from: "*"
+              to: "http_response"
+              isOneToOne: true
+              isSetofReturn: false
+            }
+          }
+      http_put: {
+        Args: { content: string; content_type: string; uri: string }
+        Returns: Database["public"]["CompositeTypes"]["http_response"]
+        SetofOptions: {
+          from: "*"
+          to: "http_response"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      http_reset_curlopt: { Args: never; Returns: boolean }
+      http_set_curlopt: {
+        Args: { curlopt: string; value: string }
+        Returns: boolean
+      }
+      log_cdp_deadline_block: {
+        Args: { p_grupo_id: string; p_kind: string; p_reason: string }
+        Returns: undefined
+      }
+      log_grupo_load_failure: {
+        Args: { _error?: string; _grupo_id: string; _section: string }
+        Returns: undefined
+      }
+      log_persona_action: {
+        Args: { _action: string; _details?: Json; _persona_id: string }
+        Returns: undefined
+      }
+      log_storage_event: {
+        Args: {
+          _bucket: string
+          _details?: Json
+          _operation: string
+          _path: string
+        }
+        Returns: undefined
+      }
+      move_to_dlq: {
+        Args: {
+          dlq_name: string
+          message_id: number
+          payload: Json
+          source_queue: string
+        }
+        Returns: number
+      }
+      msg_is_participant: {
+        Args: { _thread_id: string; _user_id: string }
+        Returns: boolean
+      }
+      msg_process_scheduled: { Args: never; Returns: number }
+      msg_recipients_by_oferta: {
+        Args: { _oferta_id: string }
+        Returns: {
+          user_id: string
+        }[]
+      }
+      msg_recipients_by_programa: {
+        Args: { _programa_id: string; _semestre?: number }
+        Returns: {
+          user_id: string
+        }[]
+      }
+      msg_recipients_by_role: {
+        Args: { _role: Database["public"]["Enums"]["app_role"] }
+        Returns: {
+          user_id: string
+        }[]
+      }
+      msg_resolve_recipients: {
+        Args: {
+          _scope_ref: string
+          _scope_type: string
+          _semestre: number
+          _user_ids: string[]
+        }
+        Returns: string[]
+      }
+      msg_send_system: {
+        Args: {
+          _body: string
+          _sender_key: string
+          _subject: string
+          _user_ids: string[]
+        }
+        Returns: string
+      }
+      prog_can_manage: { Args: { _uid: string }; Returns: boolean }
+      prog_evento_ts: {
+        Args: { _fecha: string; _hora: string }
+        Returns: string
+      }
+      prog_send_reminders: { Args: never; Returns: number }
+      qr_scan_log_cleanup: { Args: { _days?: number }; Returns: number }
+      qr_scan_log_retention_status: { Args: never; Returns: Json }
+      read_email_batch: {
+        Args: { batch_size: number; queue_name: string; vt: number }
+        Returns: {
+          message: Json
+          msg_id: number
+          read_ct: number
+        }[]
+      }
+      release_zadarma_extension: {
+        Args: { p_user_id: string }
+        Returns: undefined
+      }
+      resolve_user_id_by_email: { Args: { _email: string }; Returns: string }
+      sem_calcular_promedio: {
+        Args: { _persona_id: string; _programa_id: string }
+        Returns: number
+      }
+      sem_estudiante_tiene_mora: {
+        Args: { _persona_id: string }
+        Returns: boolean
+      }
+      sem_get_mi_persona: {
+        Args: never
+        Returns: {
+          apellidos: string
+          documento: string
+          email: string
+          foto_url: string
+          id: string
+          nombres: string
+          telefono: string
+        }[]
+      }
+      sem_inscripciones_sin_vincular: {
+        Args: never
+        Returns: {
+          email: string
+          inscripcion_id: string
+          nombre: string
+          persona_id: string
+        }[]
+      }
+      sem_is_staff: { Args: { _uid: string }; Returns: boolean }
+      sem_is_tesoreria: { Args: { _uid: string }; Returns: boolean }
+      sem_persona_id_for_user: { Args: { _uid: string }; Returns: string }
+      sem_puede_inscribir: {
+        Args: { _materia_id: string; _persona_id: string }
+        Returns: boolean
+      }
+      sem_recalcular_inscripcion: {
+        Args: { _persona_id: string; _programa_id: string }
+        Returns: Json
+      }
+      sem_reindex_vinculos: {
+        Args: never
+        Returns: {
+          estudiantes_sin_materias: number
+          inscripciones_sin_usuario: number
+          inscripciones_vinculadas: number
+          profiles_vinculados: number
+        }[]
+      }
+      sem_resolve_user_id_from_persona: {
+        Args: { _persona_id: string }
+        Returns: string
+      }
+      sem_user_can_read_recurso: {
+        Args: {
+          _materia_id: string
+          _periodo_id: string
+          _programa_id: string
+          _uid?: string
+        }
+        Returns: boolean
+      }
+      sem_user_enrolled_foro: {
+        Args: { _foro_id: string; _uid?: string }
+        Returns: boolean
+      }
+      sem_user_enrolled_materia: {
+        Args: { _materia_id: string; _uid?: string }
+        Returns: boolean
+      }
+      sem_user_enrolled_oferta: {
+        Args: { _oferta_id: string; _uid?: string }
+        Returns: boolean
+      }
+      sem_user_enrolled_periodo: {
+        Args: { _periodo_id: string; _uid?: string }
+        Returns: boolean
+      }
+      sem_user_enrolled_programa: {
+        Args: { _programa_id: string; _uid?: string }
+        Returns: boolean
+      }
+      sem_user_owns_inscripcion: {
+        Args: { _inscripcion_id: string; _uid?: string }
+        Returns: boolean
+      }
+      sem_user_owns_inscripcion_materia: {
+        Args: { _inscripcion_materia_id: string; _uid?: string }
+        Returns: boolean
+      }
+      sem_usuario_vinculacion_status: {
+        Args: never
+        Returns: {
+          detalle: string
+          display_name: string
+          email: string
+          estado: string
+          has_student_role: boolean
+          inscripciones_count: number
+          materias_count: number
+          persona_documento: string
+          persona_id: string
+          persona_nombre: string
+          roles: string[]
+          user_id: string
+        }[]
+      }
+      servicio_qr_activate: {
+        Args: { _minutes?: number; _servicio_id: string }
+        Returns: Json
+      }
+      servicio_qr_close: { Args: { _servicio_id: string }; Returns: undefined }
+      tema_semana_revertir: { Args: { _version_id: string }; Returns: string }
+      tema_semana_vigente: {
+        Args: never
+        Returns: {
+          created_at: string
+          created_by_email: string
+          descripcion: string
+          fecha_fin: string
+          fecha_inicio: string
+          id: string
+          pdf_url: string
+          titulo: string
+          url: string
+        }[]
+      }
+      text_to_bytea: { Args: { data: string }; Returns: string }
+      urlencode:
+        | { Args: { data: Json }; Returns: string }
+        | {
+            Args: { string: string }
+            Returns: {
+              error: true
+            } & "Could not choose the best candidate function between: public.urlencode(string => bytea), public.urlencode(string => varchar). Try renaming the parameters or the function itself in the database so function overloading can be resolved"
+          }
+        | {
+            Args: { string: string }
+            Returns: {
+              error: true
+            } & "Could not choose the best candidate function between: public.urlencode(string => bytea), public.urlencode(string => varchar). Try renaming the parameters or the function itself in the database so function overloading can be resolved"
+          }
+    }
+    Enums: {
+      app_role:
+        | "admin"
+        | "pastor"
+        | "lider"
+        | "secretaria"
+        | "tesoreria"
+        | "maestro"
+        | "consulta"
+        | "super_admin"
+        | "consolidador_lider"
+        | "consolidador"
+        | "lider_intercesion"
+        | "lider_red"
+        | "lider_casa_paz"
+        | "seminario_admin"
+        | "seminario_docente"
+        | "seminario_estudiante"
+        | "coordinador_infantil"
+        | "recepcion_infantil"
+      cert_template_tipo:
+        | "lideres_cdp"
+        | "bautismo"
+        | "seminario_diploma"
+        | "academia"
+      estado_iglesia: "Activo" | "Inactivo" | "En proceso"
+      tipo_finanza: "Ingreso" | "Gasto"
+      tipo_grupo:
+        | "Células"
+        | "Jóvenes"
+        | "Mujeres"
+        | "Hombres"
+        | "Niños"
+        | "Alabanza"
+        | "Ujieres"
+        | "Liderazgo"
+        | "Discipulado"
+        | "Casas de paz"
+        | "Grupos encuentro"
+      tipo_persona:
+        | "Miembro"
+        | "Visitante"
+        | "Líder"
+        | "Servidor"
+        | "CDP"
+        | "Iglesia Virtual"
+        | "Estudiante Seminario"
+        | "Discípulo"
+        | "Maestro Seminario"
+        | "Miembro No Activo"
+        | "Líder Casa de Paz"
+        | "Líder de Red"
+        | "Mentor"
+        | "Pastor Principal"
+        | "Maestro Discipulado"
+      tipo_servicio:
+        | "Culto general"
+        | "Oración"
+        | "Reunión de líderes"
+        | "Escuela bíblica"
+        | "Vigilia"
+        | "Servicio especial"
+    }
+    CompositeTypes: {
+      http_header: {
+        field: string | null
+        value: string | null
+      }
+      http_request: {
+        method: unknown
+        uri: string | null
+        headers: Database["public"]["CompositeTypes"]["http_header"][] | null
+        content_type: string | null
+        content: string | null
+      }
+      http_response: {
+        status: number | null
+        content_type: string | null
+        headers: Database["public"]["CompositeTypes"]["http_header"][] | null
+        content: string | null
+      }
+    }
+  }
+}
+
+type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">
+
+type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">]
+
+export type Tables<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
+    | { schema: keyof DatabaseWithoutInternals },
+  TableName extends (DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
+        DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
+    : never) = never,
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
+      DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
+      Row: infer R
+    }
+    ? R
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof (DefaultSchema["Tables"] &
+        DefaultSchema["Views"])
+    ? (DefaultSchema["Tables"] &
+        DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {
+        Row: infer R
+      }
+      ? R
+      : never
+    : never
+
+export type TablesInsert<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof DefaultSchema["Tables"]
+    | { schema: keyof DatabaseWithoutInternals },
+  TableName extends (DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    : never) = never,
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+      Insert: infer I
+    }
+    ? I
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
+    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
+        Insert: infer I
+      }
+      ? I
+      : never
+    : never
+
+export type TablesUpdate<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof DefaultSchema["Tables"]
+    | { schema: keyof DatabaseWithoutInternals },
+  TableName extends (DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    : never) = never,
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+      Update: infer U
+    }
+    ? U
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
+    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
+        Update: infer U
+      }
+      ? U
+      : never
+    : never
+
+export type Enums<
+  DefaultSchemaEnumNameOrOptions extends
+    | keyof DefaultSchema["Enums"]
+    | { schema: keyof DatabaseWithoutInternals },
+  EnumName extends (DefaultSchemaEnumNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
+    : never) = never,
+> = DefaultSchemaEnumNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
+  : DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"]
+    ? DefaultSchema["Enums"][DefaultSchemaEnumNameOrOptions]
+    : never
+
+export type CompositeTypes<
+  PublicCompositeTypeNameOrOptions extends
+    | keyof DefaultSchema["CompositeTypes"]
+    | { schema: keyof DatabaseWithoutInternals },
+  CompositeTypeName extends (PublicCompositeTypeNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
+    : never) = never,
+> = PublicCompositeTypeNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
+  : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
+    ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
+    : never
+
+export const Constants = {
+  public: {
+    Enums: {
+      app_role: [
+        "admin",
+        "pastor",
+        "lider",
+        "secretaria",
+        "tesoreria",
+        "maestro",
+        "consulta",
+        "super_admin",
+        "consolidador_lider",
+        "consolidador",
+        "lider_intercesion",
+        "lider_red",
+        "lider_casa_paz",
+        "seminario_admin",
+        "seminario_docente",
+        "seminario_estudiante",
+        "coordinador_infantil",
+        "recepcion_infantil",
+      ],
+      cert_template_tipo: [
+        "lideres_cdp",
+        "bautismo",
+        "seminario_diploma",
+        "academia",
+      ],
+      estado_iglesia: ["Activo", "Inactivo", "En proceso"],
+      tipo_finanza: ["Ingreso", "Gasto"],
+      tipo_grupo: [
+        "Células",
+        "Jóvenes",
+        "Mujeres",
+        "Hombres",
+        "Niños",
+        "Alabanza",
+        "Ujieres",
+        "Liderazgo",
+        "Discipulado",
+        "Casas de paz",
+        "Grupos encuentro",
+      ],
+      tipo_persona: [
+        "Miembro",
+        "Visitante",
+        "Líder",
+        "Servidor",
+        "CDP",
+        "Iglesia Virtual",
+        "Estudiante Seminario",
+        "Discípulo",
+        "Maestro Seminario",
+        "Miembro No Activo",
+        "Líder Casa de Paz",
+        "Líder de Red",
+        "Mentor",
+        "Pastor Principal",
+        "Maestro Discipulado",
+      ],
+      tipo_servicio: [
+        "Culto general",
+        "Oración",
+        "Reunión de líderes",
+        "Escuela bíblica",
+        "Vigilia",
+        "Servicio especial",
+      ],
+    },
+  },
+} as const
