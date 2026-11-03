@@ -278,7 +278,7 @@ export function useAfirmacionRuta() {
         try {
           const { data, error } = await supabase
             .from("personas")
-            .select("*, grupos(id, nombre), persona_procesos(proceso_id, estado, fecha_completado, observacion)")
+            .select("*, grupos!grupo_id(id, nombre), persona_procesos!persona_procesos_persona_id_fkey(proceso_id, estado, fecha_completado, observacion)")
             .order("created_at", { ascending: false })
             .range(pageFrom, pageFrom + CHUNK_SIZE - 1);
 

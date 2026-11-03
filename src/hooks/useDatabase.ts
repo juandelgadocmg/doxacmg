@@ -16,7 +16,7 @@ export function usePersonas() {
         try {
           const { data, error } = await supabase
             .from("personas")
-            .select("*, grupos(id, nombre), persona_procesos(proceso_id, estado, fecha_completado, observacion)")
+            .select("*, grupos!grupo_id(id, nombre), persona_procesos!persona_procesos_persona_id_fkey(proceso_id, estado, fecha_completado, observacion)")
             .order("created_at", { ascending: false })
             .range(pageFrom, pageFrom + CHUNK_SIZE - 1);
 
@@ -291,8 +291,8 @@ export function usePersonasParaExport(filtros: PersonaExportFiltros, enabled = t
           .select(`
             id, nombres, apellidos, tipo_persona, estado_iglesia, vinculacion, ministerio,
             fecha_ingreso, invitado_por, seguimiento_por, created_at,
-            grupos!fk_personas_grupo(nombre),
-            persona_procesos(proceso_id, estado, fecha_completado, observacion)
+            grupos!grupo_id(nombre),
+            persona_procesos!persona_procesos_persona_id_fkey(proceso_id, estado, fecha_completado, observacion)
           `)
           .order(orderField, { ascending: false, nullsFirst: false })
           .range(from, from + PAGE_SIZE - 1);
