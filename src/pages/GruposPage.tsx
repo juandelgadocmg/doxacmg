@@ -58,7 +58,7 @@ function useRedStats() {
       // Fetch all reportes_grupos with attendance data
       const { data: reportes } = await supabase
         .from("reportes_grupos")
-        .select("grupo_id, ofrenda_casa_paz, estado, reporte_asistencia(presente)")
+        .select("grupo_id, ofrenda_casa_paz, estado, reporte_asistencia!reporte_asistencia_reporte_id_fkey(presente)")
         .eq("estado", "Aprobado");
 
       const stats = REDES.map(red => {

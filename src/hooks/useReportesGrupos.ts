@@ -42,21 +42,25 @@ export function useReportesGrupos() {
 
       const reportes = data as unknown as ReporteGrupo[];
 
-      // Fetch attendance counts for all reports
+      // Fetch attendance counts for all reports in safe chunks of 50 to prevent URI Too Large errors
       const reporteIds = reportes.map((r) => r.id);
       if (reporteIds.length > 0) {
-        const { data: asistencia } = await supabase
-          .from("reporte_asistencia" as any)
-          .select("reporte_id, presente, es_nuevo")
-          .in("reporte_id", reporteIds) as any;
-
         const countMap: Record<string, { presentes: number; ausentes: number; nuevos: number }> = {};
-        (asistencia || []).forEach((a: any) => {
-          if (!countMap[a.reporte_id]) countMap[a.reporte_id] = { presentes: 0, ausentes: 0, nuevos: 0 };
-          if (a.presente) countMap[a.reporte_id].presentes++;
-          else countMap[a.reporte_id].ausentes++;
-          if (a.es_nuevo) countMap[a.reporte_id].nuevos++;
-        });
+        const BATCH_SIZE = 50;
+        for (let i = 0; i < reporteIds.length; i += BATCH_SIZE) {
+          const batch = reporteIds.slice(i, i + BATCH_SIZE);
+          const { data: asistencia } = await supabase
+            .from("reporte_asistencia" as any)
+            .select("reporte_id, presente, es_nuevo")
+            .in("reporte_id", batch) as any;
+
+          (asistencia || []).forEach((a: any) => {
+            if (!countMap[a.reporte_id]) countMap[a.reporte_id] = { presentes: 0, ausentes: 0, nuevos: 0 };
+            if (a.presente) countMap[a.reporte_id].presentes++;
+            else countMap[a.reporte_id].ausentes++;
+            if (a.es_nuevo) countMap[a.reporte_id].nuevos++;
+          });
+        }
 
         reportes.forEach((r) => {
           r.asistencia_count = countMap[r.id] || { presentes: 0, ausentes: 0, nuevos: 0 };

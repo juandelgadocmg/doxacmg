@@ -133,17 +133,21 @@ export function useGrupoReportes(grupoId: string | null) {
       let countMap: Record<string, { presentes: number; ausentes: number; nuevos: number }> = {};
 
       if (reporteIds.length > 0) {
-        const { data: asist } = await supabase
-          .from("reporte_asistencia" as any)
-          .select("reporte_id, presente, es_nuevo")
-          .in("reporte_id", reporteIds) as any;
+        const BATCH_SIZE = 50;
+        for (let i = 0; i < reporteIds.length; i += BATCH_SIZE) {
+          const batch = reporteIds.slice(i, i + BATCH_SIZE);
+          const { data: asist } = await supabase
+            .from("reporte_asistencia" as any)
+            .select("reporte_id, presente, es_nuevo")
+            .in("reporte_id", batch) as any;
 
-        (asist || []).forEach((a: any) => {
-          if (!countMap[a.reporte_id]) countMap[a.reporte_id] = { presentes: 0, ausentes: 0, nuevos: 0 };
-          if (a.presente) countMap[a.reporte_id].presentes++;
-          else countMap[a.reporte_id].ausentes++;
-          if (a.es_nuevo) countMap[a.reporte_id].nuevos++;
-        });
+          (asist || []).forEach((a: any) => {
+            if (!countMap[a.reporte_id]) countMap[a.reporte_id] = { presentes: 0, ausentes: 0, nuevos: 0 };
+            if (a.presente) countMap[a.reporte_id].presentes++;
+            else countMap[a.reporte_id].ausentes++;
+            if (a.es_nuevo) countMap[a.reporte_id].nuevos++;
+          });
+        }
       }
 
       return (data || []).map((r: any): ReporteResumen => ({
@@ -176,22 +180,27 @@ export function useGrupoAsistenciaStats(grupoId: string | null) {
       if (!reportes || reportes.length === 0) return [];
 
       const ids = reportes.map((r: any) => r.id);
-      const { data: asist } = await supabase
-        .from("reporte_asistencia" as any)
-        .select("reporte_id, presente, es_nuevo")
-        .in("reporte_id", ids) as any;
-
       const map: Record<string, { fecha: string; presentes: number; ausentes: number; nuevos: number }> = {};
       reportes.forEach((r: any) => {
         map[r.id] = { fecha: r.fecha, presentes: 0, ausentes: 0, nuevos: 0 };
       });
-      (asist || []).forEach((a: any) => {
-        if (map[a.reporte_id]) {
-          if (a.presente) map[a.reporte_id].presentes++;
-          else map[a.reporte_id].ausentes++;
-          if (a.es_nuevo) map[a.reporte_id].nuevos++;
-        }
-      });
+
+      const BATCH_SIZE = 50;
+      for (let i = 0; i < ids.length; i += BATCH_SIZE) {
+        const batch = ids.slice(i, i + BATCH_SIZE);
+        const { data: asist } = await supabase
+          .from("reporte_asistencia" as any)
+          .select("reporte_id, presente, es_nuevo")
+          .in("reporte_id", batch) as any;
+
+        (asist || []).forEach((a: any) => {
+          if (map[a.reporte_id]) {
+            if (a.presente) map[a.reporte_id].presentes++;
+            else map[a.reporte_id].ausentes++;
+            if (a.es_nuevo) map[a.reporte_id].nuevos++;
+          }
+        });
+      }
 
       return Object.values(map);
     },
